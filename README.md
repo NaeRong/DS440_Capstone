@@ -1,6 +1,6 @@
 # LADI Dataset Documentation
 
-[TOC]
+#Table of contents won't upload for some reason?
 
 # Download
 
