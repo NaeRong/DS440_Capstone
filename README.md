@@ -185,7 +185,7 @@ For our first approach, we will use human generated labels as the most accurate 
   - *Answer :* Dataset contains 495 categories
 
 - Answer outputs can be similar to the following: 
-  **INSERT PHOTO HERE**
+  ![img](https://github.com/NaeRong/DS440_Capstone/blob/master/human_annotations.png)
 
   Among the different categories, our project will first focus on ‘damage’ and ‘infrastructure’ labels.
 
@@ -201,7 +201,7 @@ For our first approach, we will use human generated labels as the most accurate 
    label_damage_infra['Freq'] = label_damage_infra.groupby('img_url')["Answer"].transform('size') 
    ```
 
-   **INSERT PHOTO HERE**
+   ![img](https://github.com/NaeRong/DS440_Capstone/blob/master/freq_cnt_demo.png)
 
 4. Extract the maximum count in one image url
 
