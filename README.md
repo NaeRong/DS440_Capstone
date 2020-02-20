@@ -1,18 +1,29 @@
 # LADI Dataset Documentation
-
-#Table of contents won't upload for some reason?
+- [Download](#download)
+  * [Using AWS S3 Console](#using_aws_s3_console)
+    + [Download LADI to Local Machine with AWS Command Line Interface](#download_ladi_to_local_machine_with_aws_command_line_interface)
+     + [Transfer LADI to Your Own S3 Bucket](#transfer_ladi_to_your_own_s3_bucket)
+  * [Access and Download LADI Data via Web Browser](#access_and_download_ladi_data_via_web_browser)
+- [Load LADI in Python 3](#load_ladi_in_python3)
+  * [LADI Stored in S3 Bucket](#ladi_stored_in_s3_bucket)
+  * [LADI Stored in Local Machine](#ladi_stored_in_local_machine)
+- [Clean and validate dataset](#clean_and_validate_ladi_dataset)
+  * [Generate Ground Truth Labels from Aggregated Responses .tsv file](#generate_labels_from_aggregated_responses_file)
+  * [Data Cleaning for ladi_images_metadata.csv](#data_cleaning_for_ladi_images_metadata)
+  * [Features Selection Based on Image Metadata and Aggregated Response Data](#features_selection_based_on_image_metadata_and_aggregated_response_data)
+ 
 
 # Download
 
 Data in LADI is stored in AWS S3 storage. To access or download images, metadata, and labels in LADI, you can optionally choose to work with Amazon AWS Console or not.
 
-## Using AWS S3 Console
+## Using_AWS_S3_Console
 
 To use Amazon S3, you need an AWS account. If you do not have one yet, please visit the [Amazon Web Services Homepage](https://aws.amazon.com/) and follow the tutorial on [Create and Activate an AWS Account](https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account/) to create an AWS account.
 
 After you have created and activated your account, you can choose to download LADI from AWS S3 to your local machine using AWS Command Line Interface or transfer LADI dataset into your own S3 bucket.
 
-### Download LADI to Local Machine with AWS Command Line Interface
+### Download_LADI_to_Local_Machine_with_AWS_Command_Line_Interface
 
 1. Go to [AWS Command Line Interface User Guide](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html) to install AWS CLI on your system. You have the options to install AWS CLI on Linux, MacOS, Windows and Virtual Environment.
 
@@ -49,7 +60,7 @@ After you have created and activated your account, you can choose to download LA
 
 6. Go to the local path specified in the previous step and verify the requested files from LADI has been downloaded.
 
-### Transfer LADI to Your Own S3 Bucket
+### Transfer_LADI_to_Your_Own_S3_Bucket
 
 1.  Please follow Step 1 to Step 4 in the "Download LADI to Local Machine with AWS Command Line Interface" section to install and configure AWS CLI.
 
@@ -69,11 +80,11 @@ After you have created and activated your account, you can choose to download LA
 
 6. Go to the [Amazon S3 console](https://console.aws.amazon.com/s3/) to verify that the requested files from LADI have been transferred.
 
-## Access and Download LADI Data via Web Browser
+## Access_and_Download_LADI_Data_via_Web_Browser
 
 Without Amazon AWS account and services, users can also access and download files in LADI by going to http://ladi.s3-us-west-2.amazonaws.com/index.html using a web browser. However, due to efficiency of downloading the data, we highly recommend to use AWS CLI.
 
-# Load LADI in Python 3
+# Load_LADI_in_Python3
 
 Users can load files and data from LADI in Python 3 by using AWS Python SDK Boto 3 if the dataset is stored in AWS S3 bucket. LADI can also be load using other packages: Pandas, NumPy and PyTorch. Using the following command to install these packages:
 
@@ -111,7 +122,7 @@ Users can load files and data from LADI in Python 3 by using AWS Python SDK Boto
 
   *Note: If you are a Mac user, replace pip with pip3 in the commands above to install those packages. If you are installing those packages via Anaconda, please refer to the links provided above for more information about commands to use for installation.*
 
-## LADI Stored in S3 Bucket
+## LADI_Stored_in_S3_Bucket
 
 If you transferred LADI into your own AWS S3 bucket and prefer to not store the files to your local machine, Boto 3, the AWS Python SDK, can help you access and read files in S3 bucket.
 *Example: Using Boto3 and Pandas to read a .csv file from LADI stored in S3 bucket.*
@@ -136,7 +147,7 @@ If you transferred LADI into your own AWS S3 bucket and prefer to not store the 
    `obj` contains metadata of the file and the `Body` of the object contains actual data in a `StreamingBody` format. If we display first 10 rows in the `image_metadata`, we can get a table as following:
    ![img](https://lh5.googleusercontent.com/r9EpfcV23Nq6-KlWS-EmoWpidh9Ae6qam83oXypTZcGMO8c4CqmWdWzeeEuhWpV3X9uRUSnaH-iiCg_ox5bSIAEPcTPwcBulEAEyT1UbiRT1XKHyyguM4zft0w2HkicEdSf95lw)
 
-## LADI Stored in Local Machine
+## LADI_Stored_in_Local_Machine
 
 If you downloaded LADI to your local machine, you are able to read the files using Pandas and other packages without the assistance of Boto 3.
 
@@ -155,11 +166,15 @@ plt.imshow(im, cmap='Greys_r')
 ```
 ![img](https://github.com/NaeRong/DS440_Capstone/blob/master/010_0775_4365f589-de67-4561-8fdd-f1ac1ac1ae07.jpg)
 
-# Clean and Validate LADI Dataset
+# Clean_and_Validate_LADI_Dataset
 
-## Task 1: Generate Ground Truth Labels from Aggregated Responses .tsv file
+## Generate_Labels_from_Aggregated_Responses_file
 
 For our first approach, we will use human generated labels as the most accurate feature to represent each image. Our goal is to clean and validate the LADI dataset so that we can use them to train our image classification model. 
+
+The image url can have multiple labels associated to it. Therefore, for workers that gave multiple labels in ancwer, you should seperate each of the labels withint the answer. The single response shows all the labels that one worker gave withint a single category.
+
+Human generated labels cover 20% of the total images in the dataset. 
 
 1. Download human generated label dataset into local environment and export the dataset into Cloud environment.
 
@@ -189,31 +204,30 @@ For our first approach, we will use human generated labels as the most accurate 
 
   Among the different categories, our project will first focus on ‘damage’ and ‘infrastructure’ labels.
 
-2. Extract labels with damage and infastructure categories
+2. Strip off bracket and comma from the Answer catagory
+
+   ```python
+   file["Answer"] = file["Answer"].str.strip('[|]')
+   file["Answer"] = file["Answer"].str.split(",",expand = True)
+   ```
+3. Extract labels with damage and infastructure categories
 
    ```python
    label_damage_infra = file[file['Answer'].str.contains('damage|infrastructure',na=False,case=False)]
    ```
-
-3. Frequency count on how many labels one image_url has:
-
-   ```python
-   label_damage_infra['Freq'] = label_damage_infra.groupby('img_url')["Answer"].transform('size') 
-   ```
-
-   ![img](https://github.com/NaeRong/DS440_Capstone/blob/master/freq_cnt_demo.png)
-
-4. Extract the maximum count in one image url
+4. Extract labels with damage and infastructure categories
 
    ```python
-   label_damage_infra['Freq'] = label_damage_infra.groupby('img_url')["Freq"].transform('max') 
-   ```
+   label_damage_infra = file[file['Answer'].str.contains('damage|infrastructure',na=False,case=False)]
+   ``` 
+5*. (Optional) Save new dataset into csv file
 
-5. Identify the ground truth label for each image url
-   By calculating the most frequent label for each url, we are able to identify the ground truth for our deep learning model. 
+   ```python
+   label_damage_infra.to_csv('/content/drive/My Drive/Colab Notebooks/DS440_data/label_damage_infra.csv')
+   ```   
 
-## Task 2: Data Cleaning for ladi_images_metadata.csv
+## Data_Cleaning_for_ladi_images_metadata
 
 
 
-## Task 3: Features Selection Based on Image Metadata and Aggregated Response Data
+## Features_Selection_Based_on_Image_Metadata_and_Aggregated_Response_Data
