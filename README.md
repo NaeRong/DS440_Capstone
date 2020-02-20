@@ -200,6 +200,8 @@ Human generated labels cover 20% of the total images in the dataset.
   - *Answer :* Dataset contains 495 categories
 
 - Answer outputs can be similar to the following: 
+
+
   ![img](https://github.com/NaeRong/DS440_Capstone/blob/master/Label_Human.png)
 
   Among the different categories, our project will first focus on ‘damage’ and ‘infrastructure’ labels.
