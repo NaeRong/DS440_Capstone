@@ -20,6 +20,8 @@
 - [Create Train and Test Sets](#create-train-and-test-sets)
 
 - [License] (#License)
+
+
 *Note: This tutorial/documentation is adapted from [PyTorch Data Loading Tutorial](https://pytorch.org/tutorials/beginner/data_loading_tutorial.html) to fit in LADI Dataset. See [License](#License) section for information about license*
 
 
