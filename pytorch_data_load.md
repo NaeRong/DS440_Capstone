@@ -329,7 +329,7 @@ transformed_dataset = FloodTinyDataset(csv_file=csv_file,
                                            root_dir=root_dir,
                                            transform=transforms.Compose([
                                                transforms.Resize(2048),
-                               	transforms.RandomCrop(1792),
+                               	          transforms.RandomCrop(1792),
                                                transforms.ToTensor()
                                            ]))
 ```
@@ -391,8 +391,6 @@ The index and size of images in batch:
 
 
 ## Create Train and Test Sets
-
-- `ImageFolder`
 
 Training neural networks with PyTorch follows the explicit steps. In this step, we will determine the control factor during the training process. 
 
