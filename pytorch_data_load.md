@@ -424,15 +424,15 @@ Step 2: Write a function to adjust learning rates
 
 One of the main challenges when training deep neural networks is to balance the quality of the final solution with the training time it needs to get there. Learning rate is very criticle hyper-parameter to optimize this balance. 
 
-a) Small learning rate: Makes network adjust slowly and carefully
-b) Large learning rate: Makes network adjust quickly but might be overshooting
+- Small learning rate: Makes network adjust slowly and carefully
+- Large learning rate: Makes network adjust quickly but might be overshooting
 
 In deep learning, our gol is to have the network learn fast and precise at the same time, and find the best trade off point.
 
 There are 3 options to do so:
-1) Fixed learning rates
-2) Lower learning rates over time
-3) Stop and go learning rates
+- Fixed learning rates
+- Lower learning rates over time
+- Stop and go learning rates
 
 In this tutorial, we will focus on the second option: lower learning rates over time. This function will divides the learning rate by a factor of 10 after every 30 epochs.
 ```python 
