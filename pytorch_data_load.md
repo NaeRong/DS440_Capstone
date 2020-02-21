@@ -3,26 +3,21 @@
 **Table of Contents**
 
 - [Introduction](#introduction)
-
 - [Prerequisite](#prerequisite)
-
 - [Write Custom Dataset From LADI](#write-custom-dataset-from-ladi)
-
-- [Image Transforms](#image-transforms)
-  - [Three Basic Transforms](#three-basic-transforms)
+- [Image Tranforms](#image-tranforms)
+  - [Some Basic Transforms](#some-basic-transforms)
     - [torchvision.transforms.Resize(<em>size</em>, <em>interpolation=2</em>)](#torchvisiontransformsresizesize-interpolation2)
     - [torchvision.transforms.RandomCrop(<em>size</em>, <em>padding=None</em>, <em>pad_if_needed=False</em>, <em>fill=0</em>, <em>padding_mode='constant'</em>)](#torchvisiontransformsrandomcropsize-paddingnone-pad_if_neededfalse-fill0-padding_modeconstant)
-    - [torchvision.transforms.ToTensor](#torchvisiontransformstotensor)
+    - [torchvision.transforms.RandomRotation(<em>degrees</em>, <em>resample=False</em>, <em>*expand=False*</em>, <em>*fill=0*</em>)](#torchvisiontransformsrandomrotationdegrees-resamplefalse-expandfalse-fill0)
+    - [torchvision.transforms.RandomHorizontalFlip(<em>p=0.5</em>)](#torchvisiontransformsrandomhorizontalflipp0.5)
+  - [torchvision.transforms.ToTensor](#torchvisiontransformstotensor)
   - [Compose Transforms](#compose-transforms)
-
 - [Use Dataloader to Iterate Through Dataset](#use-dataloader-to-iterate-through-dataset)
-
 - [Create Train and Test Sets](#create-train-and-test-sets)
-
 - [License](#License)
 
-*Note: This tutorial/documentation is adapted from [PyTorch Data Loading Tutorial](https://pytorch.org/tutorials/beginner/data_loading_tutorial.html) to fit in LADI Dataset. See [License](#License) section for information about license*
-
+*Note: This tutorial/documentation is adapted from [PyTorch Data Loading Tutorial](https://pytorch.org/tutorials/beginner/data_loading_tutorial.html) to fit in LADI Dataset.  See [License](#License) section for information about license.*
 
 ## Introduction
 
@@ -126,9 +121,10 @@ warnings.filterwarnings("ignore")
 
 root_dir = '~/ladi/Images/flood_tiny/'
 csv_file = '~/ladi/Images/flood_tiny/flood_tiny_metadata.csv'
+label_csv = '~/ladi/Images/flood_tiny/flood_tiny_label.csv'
 ```
 
-The `/flood_tiny/` path contains 100 random images which are labeled as `"damage:flood/water"` in `ladi_aggregated_responses.tsv` file. The `flood_tiny_metadata.csv` contains metadata of these 100 images. It is a subset extracted from `ladi_images_metadata.csv` and is stored in the same directory with these 100 images.
+The `/flood_tiny/` path contains 100 random images which are labeled as `"damage:flood/water"` and 100 other random images which are not labeled as `"damage:flood/water"` in `ladi_aggregated_responses.tsv` file. The `flood_tiny_metadata.csv` contains metadata of these 200 images. It is a subset extracted from `ladi_images_metadata.csv` and is stored in the same directory with these 200 images. The `flood_tiny_label.csv` contains labels for the 200 images.
 
 Then, users can write a simple helper function to show images in the following steps:
 
@@ -145,12 +141,20 @@ The `flood_tiny_metadata.csv` contains 11 columns.
 | ------------- | ---------- | ------------- | ---------- | ---------- | ------- | --------- | ----- | ------ | -------------------------- | ----------- |
 | 1700          | eaf5...a58 | 10/6/15 21:49 | 32.9070717 | -80.396665 | 352     | 6100841   | 6000  | 6000   | s3://ladi/Ima...7a9f90.jpg | https://... |
 
-So, sample of our dataset will be a dict `{'image': image, 'image_name': img_name, 'uuid': uuid, 'timestamp': timestamp, 'gps_lat': gps_lat, 'gps_lon': gps_lon, 'gps_alt': gps_alt, 'orig_file_size': file_size, 'orig_width': width, 'orig_height': height}` containing the image and the information in all 11 columns. Our dataset will take an optional argument `transform` so that any required processing can be applied on the sample. We will see the usefulness of `transform` in the next section.
+The `flood_tiny_label.csv` contains 2 columns.
+
+| s3_path                                           | label |
+| ------------------------------------------------- | ----- |
+| s3://ladi/Images/FEMA_CAP/9073/613822/_CAP1438... | True  |
+
+In this case, `s3_path` will be the key to merge these two CSV files.
+
+So, sample of our dataset will be a dict `{'image': image, 'image_name': img_name, 'damage:flood/water': label, uuid': uuid, 'timestamp': timestamp, 'gps_lat': gps_lat, 'gps_lon': gps_lon, 'gps_alt': gps_alt, 'orig_file_size': file_size, 'orig_width': width, 'orig_height': height}` containing the image, the label and the information in all 11 columns. Our dataset will take an optional argument `transform` so that any required processing can be applied on the sample. We will see the usefulness of `transform` in the next section.
 
 ```python
 class FloodTinyDataset(Dataset):
 
-    def __init__(self, csv_file, root_dir, transform = None):
+    def __init__(self, csv_file, root_dir, label_csv, transform = None):
         """
         Args:
             csv_file (string): Path to the csv file with metadata.
@@ -159,6 +163,10 @@ class FloodTinyDataset(Dataset):
                 on a sample.
         """
         self.flood_tiny_metadata = pd.read_csv(csv_file)
+        self.flood_tiny_label = pd.read_csv(label_csv)
+        self.flood_tiny_data = pd.merge(self.flood_tiny_metadata, 
+                                        self.flood_tiny_label,
+                                       on="s3_path")
         self.root_dir = root_dir
         self.transform = transform
 
@@ -173,19 +181,20 @@ class FloodTinyDataset(Dataset):
         img_name = os.path.join(self.root_dir, self.flood_tiny_metadata.iloc[idx, 9][pos:])
         
         image = Image.fromarray(io.imread(img_name))
-        uuid = self.flood_tiny_metadata.iloc[idx, 1]
-        timestamp = self.flood_tiny_metadata.iloc[idx, 2]
-        gps_lat = self.flood_tiny_metadata.iloc[idx, 3]
-        gps_lon = self.flood_tiny_metadata.iloc[idx, 4]
-        gps_alt = self.flood_tiny_metadata.iloc[idx, 5]
-        file_size = self.flood_tiny_metadata.iloc[idx, 6]
-        width = self.flood_tiny_metadata.iloc[idx, 7]
-        height = self.flood_tiny_metadata.iloc[idx, 8]
+        uuid = self.flood_tiny_data.iloc[idx, 1]
+        timestamp = self.flood_tiny_data.iloc[idx, 2]
+        gps_lat = self.flood_tiny_data.iloc[idx, 3]
+        gps_lon = self.flood_tiny_data.iloc[idx, 4]
+        gps_alt = self.flood_tiny_data.iloc[idx, 5]
+        file_size = self.flood_tiny_data.iloc[idx, 6]
+        width = self.flood_tiny_data.iloc[idx, 7]
+        height = self.flood_tiny_data.iloc[idx, 8]
+        label = self.flood_tiny_data.iloc[idx, -1]
         
         if self.transform:
             image = self.transform(image)
 
-        sample = {'image': image, 'image_name': img_name, 'uuid': uuid, 'timestamp': timestamp, 'gps_lat': gps_lat, 'gps_lon': gps_lon, 'gps_alt': gps_alt, 'orig_file_size': file_size, 'orig_width': width, 'orig_height': height}
+        sample = {'image': image, 'image_name': img_name, 'damage:flood/water': label, 'uuid': uuid, 'timestamp': timestamp, 'gps_lat': gps_lat, 'gps_lon': gps_lon, 'gps_alt': gps_alt, 'orig_file_size': file_size, 'orig_width': width, 'orig_height': height}
 
         return sample
 
@@ -194,16 +203,16 @@ class FloodTinyDataset(Dataset):
 Users can instantiate this custom dataset class `FloodTinyDataset` and iterate through the data samples. 
 
 ```python
-flood_tiny_dataset = FloodTinyDataset(csv_file = csv_file, root_dir = root_dir)
+flood_tiny_dataset = FloodTinyDataset(csv_file = csv_file, root_dir = root_dir, label_csv = label_csv)
 
 fig = plt.figure()
 
 for i in range(len(flood_tiny_dataset)):
     sample = flood_tiny_dataset[i]
 
-    print(i, sample['image_name'], sample['uuid'], sample['timestamp'], sample['gps_lat'], sample['gps_lon'], sample['gps_alt'])
+    print(i, sample['damage:flood/water'], sample['image_name'], sample['uuid'], sample['timestamp'], sample['gps_lat'], sample['gps_lon'], sample['gps_alt'])
 
-    ax = plt.subplot(1, 4, i + 1)
+    ax = plt.subplot(2, 2, i + 1)
     plt.tight_layout()
     ax.set_title('Sample #{}'.format(i))
     ax.axis('off')
@@ -221,27 +230,31 @@ The first 4 samples will shown below.
 Output:
 
 ```shell
-0 ~/ladi/Images/flood_tiny/DSC_1607_6e0b5f5d-7935-4c9a-9950-1599c27a9f90.jpg eaf5cab99e5ddca7bf039f69aaa7ae3a719f8a58 2015-10-06 21:49:05 32.907071666666695 -80.396665 352.0
-1 ~/ladi/Images/flood_tiny/DSC_0665_c4039ba2-af88-4e5d-a914-205699e1829c.jpg c3427b8c3a4d4f2cc383cca4153e5a3d66a21639 2015-10-08 12:54:40 33.4639066666667 -79.5533583333333 465.0
-2 ~/ladi/Images/flood_tiny/DSC_9683_510521be-8714-4254-8f4f-63e700537c67.jpg f68a13d1ac3de53d9cc20964186a518eea1e5462 2017-09-08 13:13:07 29.774221666666694 -94.25206666666668 289.0
-3 ~/ladi/Images/flood_tiny/A0085_AP_0a946d44-c4f3-4bf9-82f3-e052b6d5f2e1.jpg 2deea53aaa61931512ee56f3e0cebd568fdb7dba 2017-10-04 17:00:39 18.3035433333333 -65.65087333333331 451.0
+0 True ~/ladi/Images/flood_tiny/DSC_0194_eac1a77e-3de5-46bb-a8ef-b0410314fcb1.jpg 24870156dd4154436d29f11f2b2398776ff73dff 2015-10-08 16:56:55 33.4089333333333 -79.843 690.0
+1 False ~/ladi/Images/flood_tiny/A0027-93_826eff88-456d-41b1-998e-e87f4cb91e2d.jpg fe822a019ed698f9dcde06d86f310c0c58074a5d 2017-09-26 12:32:21 18.2066466666667 -65.7328233333333 316.0
+2 True ~/ladi/Images/flood_tiny/DSC_1346_9aa9aa0f-857a-4b31-b8e9-1a231b51da73.jpg 1b799c118853279449c17e8a2950292f03f76a1b 2017-09-08 15:41:36 18.460231666666697 -66.693275 412.0
+3 False ~/ladi/Images/flood_tiny/A0027-94_355188f9-e39b-4a73-8208-17a1c2334215.jpg 4647d8ee717821ab77a74c979dda68a06a1cc9ca 2017-09-26 12:38:47 18.2105516666667 -65.7494166666667 288.0
 ```
 
 
 
-## Image `Transforms`
+## Image `Tranforms`
 
-Sometimes, neural networks expect the images of the same size. However, in most datasets, image size is not fixed. This issue requires users to modify the original images to a different size. Three useful `transform` methods are shown below:
+Sometimes, neural networks expect the images of the same size. However, in most datasets, image size is not fixed. This issue requires users to modify the original images to a different size. Some useful `transform` methods are shown below:
 
-- `Resize`: Resize the input PIL Image to the given size.
+- `Resize`: to resize the input PIL Image to the given size.
 
 - `RandomCrop`: to crop from image randomly. This is data augmentation.
+
+- `RandomRotation`: to rotate the image by angle.
+
+- `RandomHorizontalFlip`: to horizontally flip the given PIL Image randomly with a given probability.
 
 - `ToTensor`: to convert the numpy images to torch images (we need to swap axes).
 
   
 
-### Three Basic Transforms
+### Some Basic Transforms
 
 #### `torchvision.transforms.Resize`(*size*, *interpolation=2*)
 
@@ -270,6 +283,26 @@ Sometimes, neural networks expect the images of the same size. However, in most 
 
 
 
+#### `torchvision.transforms.RandomRotation`(*degrees*, *resample=False*, *expand=False*, *center=None*, *fill=0*)
+
+**Parameters**
+
+- **degrees** (*sequence* *or* *python:float* *or* *python:int*) – Range of degrees to select from. If degrees is a number instead of sequence like (min, max), the range of degrees will be (-degrees, +degrees).
+- **resample** (*{PIL.Image.NEAREST**,* *PIL.Image.BILINEAR**,* *PIL.Image.BICUBIC}**,* *optional*) – An optional resampling filter. See [filters](https://pillow.readthedocs.io/en/latest/handbook/concepts.html#filters) for more information. If omitted, or if the image has mode “1” or “P”, it is set to PIL.Image.NEAREST.
+- **expand** (*bool**,* *optional*) – Optional expansion flag. If true, expands the output to make it large enough to hold the entire rotated image. If false or omitted, make the output image the same size as the input image. Note that the expand flag assumes rotation around the center and no translation.
+- **center** (*2-tuple**,* *optional*) – Optional center of rotation. Origin is the upper left corner. Default is the center of the image.
+- **fill** (*3-tuple* *or* *python:int*) – RGB pixel fill value for area outside the rotated image. If int, it is used for all channels respectively.
+
+
+
+#### `torchvision.transforms.RandomHorizontalFlip`(*p=0.5*)
+
+**Parameters**
+
+**p** (*python:float*) – probability of the image being flipped. Default value is 0.5
+
+
+
 #### `torchvision.transforms.ToTensor`
 
 Convert a `PIL Image` or `numpy.ndarray` to tensor.
@@ -287,20 +320,22 @@ Now, apply the transforms on a sample.
 If users want to rescale the shorter side of the image to **2048** and then randomly crop a square of size **1792** from it. i.e, we want to compose `Resize` and `RandomCrop` transforms. `torchvision.transforms.Compose` is a simple callable class which allows us to do this.
 
 ```python
-from PIL import Image
-
 scale = transforms.Resize(2048)
 crop = transforms.RandomCrop(1792)
+rotate = transforms.RandomRotation(20)
+flip = transforms.RandomHorizontalFlip(1)
 composed = transforms.Compose([transforms.Resize(2048),
-                               transforms.RandomCrop(1792)])
+                               transforms.RandomCrop(1792),
+                              transforms.RandomRotation(10),
+                              transforms.RandomHorizontalFlip(1)])
 
 # Apply each of the above transforms on sample.
 fig = plt.figure()
-sample = flood_tiny_dataset[62]
-for i, tsfrm in enumerate([scale, crop, composed]):
+sample = flood_tiny_dataset[198]
+for i, tsfrm in enumerate([scale, crop, rotate, flip, composed]):
     transformed_image = tsfrm(sample['image'])
 
-    ax = plt.subplot(1, 3, i + 1)
+    ax = plt.subplot(2, 3, i + 1)
     plt.tight_layout()
     ax.set_title(type(tsfrm).__name__)
     show_image(transformed_image)
@@ -322,18 +357,17 @@ Compared to simple `for` loop to iterate over data, `torch.utils.data.DataLoader
 - Shuffling the data.
 - Load the data in parallel using `multiprocessing` workers.
 
-In the previous section, three `transforms` are performed on a sample. In this section, users can learn to use `Dataloader` to iterate over all images in the dataset.
+In the previous section, three `transforms` are performed on a sample. In this section, users can learn to use `Dataloader` to transform all images in the dataset.
 
 First, a new dataset with `transform` needs to be defined.
 
 ```python
-transformed_dataset = FloodTinyDataset(csv_file=csv_file,
-                                           root_dir=root_dir,
-                                           transform=transforms.Compose([
-                                               transforms.Resize(2048),
-                               	          transforms.RandomCrop(1792),
-                                               transforms.ToTensor()
-                                           ]))
+transformed_dataset = FloodTinyDataset(csv_file=csv_file, root_dir=root_dir, 
+                                       label_csv = label_csv,				                                     															transform=transforms.Compose([transforms.Resize(2048),                                                                                                            
+															transforms.RandomCrop(1792), 
+															transforms.RandomRotation(10), 
+															transforms.RandomHorizontalFlip(), 
+															transforms.ToTensor()]))
 ```
 
 Then, feed the new dataset `transformed_dataset` into `Dataloader`.
@@ -360,7 +394,7 @@ def show_images_batch(sample_batched):
         plt.title('Batch from dataloader')
 ```
 
-At last, let `dataloader` show the transformed images in batches.
+At last, let `dataloader` transform the images in batches.
 
 ```python
 for i_batch, sample_batched in enumerate(dataloader):
@@ -387,7 +421,6 @@ The index and size of images in batch:
 1 torch.Size([4, 3, 1792, 1792])
 2 torch.Size([4, 3, 1792, 1792])
 3 torch.Size([4, 3, 1792, 1792])
-
 ```
 
 
@@ -466,6 +499,8 @@ def save_models(epoch):
 #To be continue next week
 ```
 
+
+
 ## License
 
 BSD 3-Clause License
@@ -497,3 +532,4 @@ SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
 CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
