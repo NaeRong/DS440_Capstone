@@ -385,6 +385,7 @@ The index and size of images in batch:
 1 torch.Size([4, 3, 1792, 1792])
 2 torch.Size([4, 3, 1792, 1792])
 3 torch.Size([4, 3, 1792, 1792])
+
 ```
 
 
@@ -393,3 +394,74 @@ The index and size of images in batch:
 
 - `ImageFolder`
 
+Training neural networks with PyTorch follows the explicit steps. In this step, we will determine the control factor during the training process. 
+
+Information about Torch.Optim : https://pytorch.org/docs/stable/optim.html
+
+```python
+from torch.optim import Adam
+```
+* Decide how many classes you will be using for SimpleNet
+```python
+len(np.unique(label_damage['Answer']))
+```
+Step 1: Create the optimizer and Loss function
+```python 
+from torch.optim import Adam
+#Check the gpu support
+cuda_avail = torch.cuda.is_available()
+# Create model, optimizer and loss function
+# Num of classes depends on which dataset you are using [Human generated label: disaster]
+model = SimpleNet(num_classes=7)
+if cuda_avail:
+    model.cuda()
+#Define the optimizer and loss function
+optimizer = Adam(model.parameters(), lr=0.01, weight_decay=0.0001)
+loss_fn = nn.CrossEntropyLoss()
+```
+
+Step 2: Write a function to adjust learning rates
+
+One of the main challenges when training deep neural networks is to balance the quality of the final solution with the training time it needs to get there. Learning rate is very criticle hyper-parameter to optimize this balance. 
+
+a) Small learning rate: Makes network adjust slowly and carefully
+b) Large learning rate: Makes network adjust quickly but might be overshooting
+
+In deep learning, our gol is to have the network learn fast and precise at the same time, and find the best trade off point.
+
+There are 3 options to do so:
+1) Fixed learning rates
+2) Lower learning rates over time
+3) Stop and go learning rates
+
+In this tutorial, we will focus on the second option: lower learning rates over time. This function will divides the learning rate by a factor of 10 after every 30 epochs.
+```python 
+def adjust_learning_rate(epoch):
+    lr = 0.01
+
+    if epoch > 180:
+        lr = lr / 1000000
+    elif epoch > 150:
+        lr = lr / 100000
+    elif epoch > 120:
+        lr = lr / 10000
+    elif epoch > 90:
+        lr = lr / 1000
+    elif epoch > 60:
+        lr = lr / 100
+    elif epoch > 30:
+        lr = lr / 10
+
+    for param_group in optimizer.param_groups:
+        param_group["lr"] = lr
+```
+Step 3: Save and evaliate the model
+```python
+def save_models(epoch):
+    torch.save(model.state_dict(), "cifar10model_{}.model".format(epoch))
+    print("Chekcpoint saved")
+```
+```python
+#test model on the image dataset
+#To be continue next week
+```
