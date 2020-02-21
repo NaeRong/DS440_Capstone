@@ -320,7 +320,7 @@ Compared to simple `for` loop to iterate over data, `torch.utils.data.DataLoader
 - Shuffling the data.
 - Load the data in parallel using `multiprocessing` workers.
 
-In the previous section, three `transforms` are performed on a sample. In this section, users can learn to use `Dataloader` to transform all images in the dataset.
+In the previous section, three `transforms` are performed on a sample. In this section, users can learn to use `Dataloader` to iterate over all images in the dataset.
 
 First, a new dataset with `transform` needs to be defined.
 
@@ -358,7 +358,7 @@ def show_images_batch(sample_batched):
         plt.title('Batch from dataloader')
 ```
 
-At last, let `dataloader` transform the images in batches.
+At last, let `dataloader` show the transformed images in batches.
 
 ```python
 for i_batch, sample_batched in enumerate(dataloader):
@@ -453,7 +453,7 @@ def adjust_learning_rate(epoch):
     for param_group in optimizer.param_groups:
         param_group["lr"] = lr
 ```
-Step 3: Save and evaliate the model
+Step 3: Save and evaluate the model
 ```python
 def save_models(epoch):
     torch.save(model.state_dict(), "cifar10model_{}.model".format(epoch))
