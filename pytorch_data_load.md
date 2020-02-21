@@ -8,7 +8,7 @@
 
 - [Write Custom Dataset From LADI](#write-custom-dataset-from-ladi)
 
-- [Image Tranforms](#image-tranforms)
+- [Image Transforms](#image-transforms)
   - [Three Basic Transforms](#three-basic-transforms)
     - [torchvision.transforms.Resize(<em>size</em>, <em>interpolation=2</em>)](#torchvisiontransformsresizesize-interpolation2)
     - [torchvision.transforms.RandomCrop(<em>size</em>, <em>padding=None</em>, <em>pad_if_needed=False</em>, <em>fill=0</em>, <em>padding_mode='constant'</em>)](#torchvisiontransformsrandomcropsize-paddingnone-pad_if_neededfalse-fill0-padding_modeconstant)
@@ -227,7 +227,7 @@ Output:
 
 
 
-## Image `Tranforms`
+## Image `Transforms`
 
 Sometimes, neural networks expect the images of the same size. However, in most datasets, image size is not fixed. This issue requires users to modify the original images to a different size. Three useful `transform` methods are shown below:
 
