@@ -2,9 +2,25 @@
 
 **Table of Contents**
 
-[toc]
+- [Introduction](#introduction)
+
+- [Prerequisite](#prerequisite)
+
+- [Write Custom Dataset From LADI](#write-custom-dataset-from-ladi)
+
+- [Image Tranforms](#image-tranforms)
+  - [Three Basic Transforms](#three-basic-transforms)
+    - [torchvision.transforms.Resize(<em>size</em>, <em>interpolation=2</em>)](#torchvisiontransformsresizesize-interpolation2)
+    - [torchvision.transforms.RandomCrop(<em>size</em>, <em>padding=None</em>, <em>pad_if_needed=False</em>, <em>fill=0</em>, <em>padding_mode='constant'</em>)](#torchvisiontransformsrandomcropsize-paddingnone-pad_if_neededfalse-fill0-padding_modeconstant)
+    - [torchvision.transforms.ToTensor](#torchvisiontransformstotensor)
+  - [Compose Transforms](#compose-transforms)
+
+- [Use Dataloader to Iterate Through Dataset](#use-dataloader-to-iterate-through-dataset)
+
+- [Create Train and Test Sets](#create-train-and-test-sets)
 
 *Note: This tutorial/documentation is adapted from [PyTorch Data Loading Tutorial](https://pytorch.org/tutorials/beginner/data_loading_tutorial.html) to fit in LADI Dataset.*
+
 
 ## Introduction
 
@@ -198,7 +214,7 @@ for i in range(len(flood_tiny_dataset)):
 
 The first 4 samples will shown below.
 
-<img src="/Users/jianyumao/ladi/custom_flood_tiny_dataset_output.png" alt="custom_flood_tiny_dataset_output" style="zoom:36%;" />
+![img](https://github.com/NaeRong/DS440_Capstone/blob/master/custom_flood_tiny_dataset_output.png)
 
 Output:
 
@@ -292,7 +308,7 @@ plt.show()
 
 The three transforms of the sample are shown below.
 
-![pytorch_transform_flood_tiny](/Users/jianyumao/ladi/pytorch_transform_flood_tiny.png)
+![img](https://github.com/NaeRong/DS440_Capstone/blob/master/pytorch_transform_flood_tiny.png)
 
 
 
@@ -313,7 +329,7 @@ transformed_dataset = FloodTinyDataset(csv_file=csv_file,
                                            root_dir=root_dir,
                                            transform=transforms.Compose([
                                                transforms.Resize(2048),
-                               								transforms.RandomCrop(1792),
+                               	transforms.RandomCrop(1792),
                                                transforms.ToTensor()
                                            ]))
 ```
@@ -360,7 +376,7 @@ for i_batch, sample_batched in enumerate(dataloader):
 
 The transformed images in the 4th batch:
 
-![dataloader_batch_result](/Users/jianyumao/ladi/dataloader_batch_result.png)
+![img](https://github.com/NaeRong/DS440_Capstone/blob/master/dataloader_batch_result.png)
 
 The index and size of images in batch:
 
