@@ -363,8 +363,11 @@ First, a new dataset with `transform` needs to be defined.
 
 ```python
 transformed_dataset = FloodTinyDataset(csv_file=csv_file, root_dir=root_dir, 
-                                       label_csv = label_csv,				                                   
-				       transform=transforms.Compose([transforms.Resize(2048),                                                                                                 				       transforms.RandomCrop(1792), transforms.RandomRotation(10), transforms.RandomHorizontalFlip(), transforms.ToTensor()]))
+label_csv = label_csv, transform=transforms.Compose([transforms.Resize(2048), 
+transforms.RandomCrop(1792), 
+transforms.RandomRotation(10), 
+transforms.RandomHorizontalFlip(), 
+transforms.ToTensor()]))
 ```
 
 Then, feed the new dataset `transformed_dataset` into `Dataloader`.
