@@ -1,4 +1,4 @@
-# Clean_and_Validate_LADI_Dataset
+# Clean and Validate LADI Dataset
 - [Clean and validate dataset](#clean_and_validate_ladi_dataset)
   * [Generate Ground Truth Labels from Aggregated Responses .tsv file](#generate_labels_from_aggregated_responses_file)
   * [Data Cleaning for ladi_images_metadata.csv](#data_cleaning_for_ladi_images_metadata)
