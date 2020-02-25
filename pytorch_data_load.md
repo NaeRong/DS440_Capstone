@@ -225,7 +225,7 @@ for i in range(len(flood_tiny_dataset)):
 
 The first 4 samples will shown below.
 
-![img](https://github.com/NaeRong/DS440_Capstone/blob/master/custom_flood_tiny_dataset_output.png)
+![img](https://github.com/NaeRong/DS440_Capstone/blob/master/Images/custom_flood_tiny_dataset_output.png)
 
 Output:
 
@@ -345,7 +345,7 @@ plt.show()
 
 The three transforms of the sample are shown below.
 
-![img](https://github.com/NaeRong/DS440_Capstone/blob/master/pytorch_transform_flood_tiny.png)
+![img](https://github.com/NaeRong/DS440_Capstone/blob/master/Images/pytorch_transform_flood_tiny.png)
 
 
 
@@ -412,7 +412,7 @@ for i_batch, sample_batched in enumerate(dataloader):
 
 The transformed images in the 4th batch:
 
-![img](https://github.com/NaeRong/DS440_Capstone/blob/master/dataloader_batch_result.png)
+![img](https://github.com/NaeRong/DS440_Capstone/blob/master/Images/dataloader_batch_result.png)
 
 The index and size of images in batch:
 
