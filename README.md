@@ -164,7 +164,7 @@ image_path = 'Images/FEMA_CAP/1012/20118/VIRB0002_fa5065eb-773a-4b41-8f2c-80a734
 im = Image.open(image_path)
 plt.imshow(im, cmap='Greys_r')
 ```
-![img](https://github.com/NaeRong/DS440_Capstone/blob/master/010_0775_4365f589-de67-4561-8fdd-f1ac1ac1ae07.jpg)
+![img](https://github.com/NaeRong/DS440_Capstone/blob/master/Images/010_0775_4365f589-de67-4561-8fdd-f1ac1ac1ae07.jpg)
 
 # Clean_and_Validate_LADI_Dataset
 
@@ -202,7 +202,7 @@ Human generated labels cover 20% of the total images in the dataset.
 - Answer outputs can be similar to the following: 
 
 
-  ![img](https://github.com/NaeRong/DS440_Capstone/blob/master/Label_Human.png)
+  ![img](https://github.com/NaeRong/DS440_Capstone/blob/master/Images/Label_Human.png)
 
   Among the different categories, our project will first focus on ‘damage’ and ‘infrastructure’ labels.
 
