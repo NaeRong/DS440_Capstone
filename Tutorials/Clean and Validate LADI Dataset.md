@@ -4,7 +4,7 @@
   * [Data Cleaning for ladi_images_metadata.csv](#data_cleaning_for_ladi_images_metadata)
   * [Features Selection Based on Image Metadata and Aggregated Response Data](#features_selection_based_on_image_metadata_and_aggregated_response_data)
 
-## Generate_Labels_from_Aggregated_Responses_file
+## Generate Labels from Aggregated Responses File
 
 For our first approach, we will use human generated labels as the most accurate feature to represent each image. Our goal is to clean and validate the LADI dataset so that we can use them to train our image classification model. 
 
