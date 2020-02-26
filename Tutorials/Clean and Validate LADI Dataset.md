@@ -64,8 +64,8 @@ Human generated labels cover 20% of the total images in the dataset.
    label_damage_infra.to_csv('/content/drive/My Drive/Colab Notebooks/DS440_data/label_damage_infra.csv')
    ```   
 
-## Data_Cleaning_for_ladi_images_metadata
+## Data Cleaning For LADI Images Metadata
 
 
 
-## Features_Selection_Based_on_Image_Metadata_and_Aggregated_Response_Data
+## Features Selection Based on Image Metadata and Aggregated Response Data
