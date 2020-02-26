@@ -12,13 +12,13 @@
 
 Data in LADI is stored in AWS S3 storage. To access or download images, metadata, and labels in LADI, you can optionally choose to work with Amazon AWS Console or not.
 
-## Using_AWS_S3_Console
+## Using AWS S3 Console
 
 To use Amazon S3, you need an AWS account. If you do not have one yet, please visit the [Amazon Web Services Homepage](https://aws.amazon.com/) and follow the tutorial on [Create and Activate an AWS Account](https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account/) to create an AWS account.
 
 After you have created and activated your account, you can choose to download LADI from AWS S3 to your local machine using AWS Command Line Interface or transfer LADI dataset into your own S3 bucket.
 
-### Download_LADI_to_Local_Machine_with_AWS_Command_Line_Interface
+### Download LADI to Local Machine with AWS Command Line Interface
 
 1. Go to [AWS Command Line Interface User Guide](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html) to install AWS CLI on your system. You have the options to install AWS CLI on Linux, MacOS, Windows and Virtual Environment.
 
@@ -55,7 +55,7 @@ After you have created and activated your account, you can choose to download LA
 
 6. Go to the local path specified in the previous step and verify the requested files from LADI has been downloaded.
 
-### Transfer_LADI_to_Your_Own_S3_Bucket
+### Transfer LADI to Your Own S3 Bucket
 
 1.  Please follow Step 1 to Step 4 in the "Download LADI to Local Machine with AWS Command Line Interface" section to install and configure AWS CLI.
 
@@ -75,11 +75,11 @@ After you have created and activated your account, you can choose to download LA
 
 6. Go to the [Amazon S3 console](https://console.aws.amazon.com/s3/) to verify that the requested files from LADI have been transferred.
 
-## Access_and_Download_LADI_Data_via_Web_Browser
+## Access and Download LADI Data via Web Browser
 
 Without Amazon AWS account and services, users can also access and download files in LADI by going to http://ladi.s3-us-west-2.amazonaws.com/index.html using a web browser. However, due to efficiency of downloading the data, we highly recommend to use AWS CLI.
 
-# Load_LADI_in_Python3
+# Load LADI in Python3
 
 Users can load files and data from LADI in Python 3 by using AWS Python SDK Boto 3 if the dataset is stored in AWS S3 bucket. LADI can also be load using other packages: Pandas, NumPy and PyTorch. Using the following command to install these packages:
 
@@ -117,7 +117,7 @@ Users can load files and data from LADI in Python 3 by using AWS Python SDK Boto
 
   *Note: If you are a Mac user, replace pip with pip3 in the commands above to install those packages. If you are installing those packages via Anaconda, please refer to the links provided above for more information about commands to use for installation.*
 
-## LADI_Stored_in_S3_Bucket
+## LADI Stored in S3 Bucket
 
 If you transferred LADI into your own AWS S3 bucket and prefer to not store the files to your local machine, Boto 3, the AWS Python SDK, can help you access and read files in S3 bucket.
 *Example: Using Boto3 and Pandas to read a .csv file from LADI stored in S3 bucket.*
@@ -142,7 +142,7 @@ If you transferred LADI into your own AWS S3 bucket and prefer to not store the 
    `obj` contains metadata of the file and the `Body` of the object contains actual data in a `StreamingBody` format. If we display first 10 rows in the `image_metadata`, we can get a table as following:
    ![img](https://lh5.googleusercontent.com/r9EpfcV23Nq6-KlWS-EmoWpidh9Ae6qam83oXypTZcGMO8c4CqmWdWzeeEuhWpV3X9uRUSnaH-iiCg_ox5bSIAEPcTPwcBulEAEyT1UbiRT1XKHyyguM4zft0w2HkicEdSf95lw)
 
-## LADI_Stored_in_Local_Machine
+## LADI Stored in Local Machine
 
 If you downloaded LADI to your local machine, you are able to read the files using Pandas and other packages without the assistance of Boto 3.
 
