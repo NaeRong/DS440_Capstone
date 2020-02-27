@@ -123,7 +123,9 @@ csv_file = '~/ladi/Images/flood_tiny/flood_tiny_metadata.csv'
 label_csv = '~/ladi/Images/flood_tiny/flood_tiny_label.csv'
 ```
 
-The `/flood_tiny/` path contains 100 random images which are labeled as `"damage:flood/water"` and 100 other random images which are not labeled as `"damage:flood/water"` in `ladi_aggregated_responses.tsv` file. The `flood_tiny_metadata.csv` contains metadata of these 200 images. It is a subset extracted from `ladi_images_metadata.csv` and is stored in the same directory with these 200 images. The `flood_tiny_label.csv` contains labels for the 200 images.
+The `/flood_tiny/` path contains 100 random images which are labeled as `"damage:flood/water"` and 100 other random images which are not labeled as `"damage:flood/water"` according to the `ladi_aggregated_responses.tsv` file. The `flood_tiny_metadata.csv` contains metadata of these 200 images. It is a subset extracted from `ladi_images_metadata.csv` and is stored in the same directory with these 200 images. The `flood_tiny_label.csv` contains labels for the 200 images.
+
+*Note: Users can also load images from url without downloading the images to local machine. However, url information (in our case, stored in `metadata` file) and labels (stored in `label` file) are necessary and should be placed in `root_dir`. Please look at `__getitem__` function in `class FloodTinyDataset(Dataset)` for details.*
 
 Then, users can write a simple helper function to show images in the following steps:
 
@@ -175,9 +177,16 @@ class FloodTinyDataset(Dataset):
     def __getitem__(self, idx):
         if torch.is_tensor(idx):
             idx = idx.tolist()
+            
+        ## Option 1: Load images from local machine. The root_dir should contain all images. ##
+        ## Uncomment the following two lines and comment 'img_name = self.flood_tiny_metadata.iloc[idx, 10]'
+        ## if you are using Option 1. By default, we use Option 2 to load images.
+        #pos = self.flood_tiny_metadata.iloc[idx, 9].rfind('/')+1
+        #img_name = os.path.join(self.root_dir, self.flood_tiny_metadata.iloc[idx, 9][pos:])
         
-        pos = self.flood_tiny_metadata.iloc[idx, 9].rfind('/')+1
-        img_name = os.path.join(self.root_dir, self.flood_tiny_metadata.iloc[idx, 9][pos:])
+        ## Option 2: Load images from url. There is no need to download images to local machine. ##
+        ## The url information of each image is stored in metadata. 
+        img_name = self.flood_tiny_metadata.iloc[idx, 10]
         
         image = Image.fromarray(io.imread(img_name))
         uuid = self.flood_tiny_data.iloc[idx, 1]
