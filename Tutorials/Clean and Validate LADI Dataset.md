@@ -35,12 +35,12 @@ Human generated labels cover 20% of the total images in the dataset.
   - *WorkerId*
   - *Answer :* Dataset contains 495 categories
 
-- Answer outputs can be similar to the following: 
+- Answer outputs are similar to the following: 
 
 
   ![img](https://github.com/NaeRong/DS440_Capstone/blob/master/Images/Label_Human.png)
 
-  Among the different categories, our project will first focus on ‘damage’ and ‘infrastructure’ labels.
+For this project, we will only consider 'damage' and 'infrastructure' labels.
 
 2. Strip off bracket and comma from the Answer catagory
 
@@ -48,20 +48,36 @@ Human generated labels cover 20% of the total images in the dataset.
    file["Answer"] = file["Answer"].str.strip('[|]')
    file["Answer"] = file["Answer"].str.split(",",expand = True)
    ```
-3. Extract labels with damage and infastructure categories
+3. Extract labels with damage and infrastructure categories
 
    ```python
    label_damage_infra = file[file['Answer'].str.contains('damage|infrastructure',na=False,case=False)]
    ```
-4. Extract labels with damage and infastructure categories
-
+4. Filter out infrastructure label with label 'none'
    ```python
-   label_damage_infra = file[file['Answer'].str.contains('damage|infrastructure',na=False,case=False)]
+   label_clean = label_damage_infra[~label_damage_infra['Answer'].str.contains('none',na=False,case=False)]
+   ```
+5. Extract data with label does contain 'flood'
+   ```python
+   label_flood = label_clean[label_clean['Answer'].str.contains('flood',na=False,case=False)]
+   ```
+6. Extract url data with the label does contain 'flood'
+   ```python
+   im_flood_lst = label_flood['img_url'].unique().tolist()
+   ```
+7. Extract url data with the label does not contain 'flood'
+   ```python
+   label_notflood = label_damage_infra[~label_damage_infra['img_url'].isin(im_flood_lst)]
+   im_not_flood_lst = label_notflood['img_url'].unique().tolist()
    ``` 
-5*. (Optional) Save new dataset into csv file
+8*. (Optional) Save new dataset into csv file
 
    ```python
-   label_damage_infra.to_csv('/content/drive/My Drive/Colab Notebooks/DS440_data/label_damage_infra.csv')
+   def write_list_to_file(input_list, filename):
+    with open(filename, "w") as outfile:
+        for entries in input_list:
+            outfile.write(entries)
+            outfile.write("\n")
    ```   
 
 ## Data Cleaning For LADI Images Metadata
