@@ -220,10 +220,8 @@ for i in range(len(flood_tiny_dataset)):
 
     print(i, sample['damage:flood/water'], sample['image_name'], sample['uuid'], sample['timestamp'], sample['gps_lat'], sample['gps_lon'], sample['gps_alt'])
 
-    ax = plt.subplot(2, 2, i + 1)
     plt.tight_layout()
-    ax.set_title('Sample #{}'.format(i))
-    ax.axis('off')
+    plt.title('Sample #{}'.format(i))
     show_image(sample['image'])
 
     if i == 3:
