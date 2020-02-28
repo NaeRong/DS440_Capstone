@@ -1,10 +1,9 @@
 # Clean and Validate LADI Dataset
 - [Clean and validate dataset](#clean_and_validate_ladi_dataset)
-  * [Generate Ground Truth Labels from Aggregated Responses .tsv file](#generate_labels_from_aggregated_responses_file)
-  * [Data Cleaning for ladi_images_metadata.csv](#data_cleaning_for_ladi_images_metadata)
-  * [Features Selection Based on Image Metadata and Aggregated Response Data](#features_selection_based_on_image_metadata_and_aggregated_response_data)
+  * [Clean the aggregated Responses .tsv file](#clean_the_aggregated_responses_.tsv_file)
+  * [Generate True/False label](#generate_true/false_label)
 
-## Generate Labels from Aggregated Responses File
+## Clean the aggregated Responses .tsv file
 
 For our first approach, we will use human generated labels as the most accurate feature to represent each image. Our goal is to clean and validate the LADI dataset so that we can use them to train our image classification model. 
 
@@ -80,8 +79,53 @@ For this project, we will only consider 'damage' and 'infrastructure' labels.
             outfile.write("\n")
    ```   
 
-## Data Cleaning For LADI Images Metadata
+## Generate True/False label 
 
+1. Load ladi_images_metadata.csv
+```python
+metadata = pd.read_csv('/content/drive/My Drive/Colab Notebooks/ladi_images_metadata.csv')
+```
+2. Generate flood and non-flood metadata
+```python
+flood_metadata = metadata[metadata['url'].isin(im_flood_lst)]
+not_flood_metadata = metadata[metadata['url'].isin(im_not_flood_lst)]
+```
+3. Generate url and s3_path features into list
+```python
+flood_meta_lst = flood_metadata['url'].tolist()
+flood_meta_s3_lst = flood_metadata['s3_path'].tolist()
 
+not_flood_meta_lst = not_flood_metadata['url'].tolist()
+not_flood_meta_s3_lst = not_flood_metadata['s3_path'].tolist()
+```
+4. Check how many images do not have metadata but have human labels
+```python
+human_label_only = list(set(im_flood_lst) - set(flood_meta_lst))
+print(len(human_label_only))
+human_label_non_flood = list(set(im_not_flood_lst) - set(not_flood_meta_lst))
+print(len(human_label_non_flood))
+```
+5*.(Optional) Generate small image datasets for modeling purpose : flood_tiny_lst.csv and not_flood_tiny_lst.csv
+```python
+from random import sample
+flood_tiny_lst = sample(flood_meta_s3_lst, 100)
+not_flood_tiny_lst = sample(not_flood_meta_s3_lst, 100)
+flood_tiny_metadata = metadata[metadata['s3_path'].isin(flood_tiny_lst+not_flood_tiny_lst)]
 
-## Features Selection Based on Image Metadata and Aggregated Response Data
+flood_data = []
+for path in flood_tiny_lst:
+    data_lst = []
+    data_lst.append(path)
+    data_lst.append(True)
+    flood_data.append(data_lst)
+
+not_flood_data = []
+for path in not_flood_tiny_lst:
+    data_lst = []
+    data_lst.append(path)
+    data_lst.append(False)
+    not_flood_data.append(data_lst)
+
+label_data = flood_data+not_flood_data
+label_df = pd.DataFrame(label_data, columns = ['s3_path', 'label']) 
+```
