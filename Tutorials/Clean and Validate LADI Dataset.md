@@ -69,7 +69,7 @@ For this project, we will only consider 'damage' and 'infrastructure' labels.
    label_notflood = label_damage_infra[~label_damage_infra['img_url'].isin(im_flood_lst)]
    im_not_flood_lst = label_notflood['img_url'].unique().tolist()
    ``` 
-8*. (Optional) Save new dataset into csv file
+8*. (Optional) Write list into csv file
 
    ```python
    def write_list_to_file(input_list, filename):
@@ -105,7 +105,7 @@ print(len(human_label_only))
 human_label_non_flood = list(set(im_not_flood_lst) - set(not_flood_meta_lst))
 print(len(human_label_non_flood))
 ```
-5*.(Optional) Generate small image datasets for modeling purpose : flood_tiny_lst.csv and not_flood_tiny_lst.csv
+5*.(Optional) Generate small image datasets for modeling purpose : flood_tiny_metadata.csv and flood_tiny_label.csv
 ```python
 from random import sample
 flood_tiny_lst = sample(flood_meta_s3_lst, 100)
@@ -128,4 +128,7 @@ for path in not_flood_tiny_lst:
 
 label_data = flood_data+not_flood_data
 label_df = pd.DataFrame(label_data, columns = ['s3_path', 'label']) 
+#.to_csv('path')
+flood_tiny_metadata.to_csv('/content/drive/My Drive/Colab Notebooks/DS440_data/flood_tiny_metadata.csv')
+label_df.to_csv('/content/drive/My Drive/Colab Notebooks/DS440_data/flood_tiny_label.csv')
 ```
