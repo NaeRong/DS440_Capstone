@@ -2,11 +2,11 @@
 
 **Table of Contents**
 
-- [Step 1: Create the optimizer and Loss function](#step-1--create-the-optimizer-and-loss-function)
+- [Step 1: Create the optimizer and Loss function](#step-1-create-the-optimizer-and-loss-function)
 
-- [Step 2: Write a function to adjust learning rates](#step-2--write-a-function-to-adjust-learning-rates)
+- [Step 2: Write a function to adjust learning rates](#step-2-write-a-function-to-adjust-learning-rates)
 
-- [Step 3: Save and evaluate the model](#step-3--save-and-evaluate-the-model)
+- [Step 3: Save and evaluate the model](#step-3-save-and-evaluate-the-model)
 
 - [License](#license)
 
@@ -73,7 +73,7 @@ def adjust_learning_rate(epoch):
     for param_group in optimizer.param_groups:
         param_group["lr"] = lr
 ```
-### Step 3: Save and evaluate the model
+## Step 3: Save and evaluate the model
 ```python
 def save_models(epoch):
     torch.save(model.state_dict(), "cifar10model_{}.model".format(epoch))
