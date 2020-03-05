@@ -432,7 +432,7 @@ The index and size of images in batch:
 
 ## License
 
-BSD 3-Clause License
+[BSD 3-Clause License](https://github.com/pytorch/tutorials/blob/master/LICENSE)
 
 Copyright (c) 2017, Pytorch contributors
 All rights reserved.
