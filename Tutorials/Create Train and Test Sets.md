@@ -3,8 +3,11 @@
 **Table of Contents**
 
 - [Step 1: Create the optimizer and Loss function](#step-1--create-the-optimizer-and-loss-function)
+
 - [Step 2: Write a function to adjust learning rates](#step-2--write-a-function-to-adjust-learning-rates)
+
 - [Step 3: Save and evaluate the model](#step-3--save-and-evaluate-the-model)
+
 - [License](#license)
 
 *Note: This tutorial/documentation is adapted from [PyTorch Data Loading Tutorial](https://pytorch.org/tutorials/beginner/data_loading_tutorial.html) to fit in LADI Dataset.  See [License](#License) section for information about license.*
