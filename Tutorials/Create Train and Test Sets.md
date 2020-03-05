@@ -1,12 +1,13 @@
-# Create Train and Test Sets
+# SimpleNet
 
 **Table of Contents**
 
-- [Create Train and Test Sets](#create-train-and-test-sets)
-- [License](#License)
+- [Step 1: Create the optimizer and Loss function](#step-1--create-the-optimizer-and-loss-function)
+- [Step 2: Write a function to adjust learning rates](#step-2--write-a-function-to-adjust-learning-rates)
+- [Step 3: Save and evaluate the model](#step-3--save-and-evaluate-the-model)
+- [License](#license)
 
 *Note: This tutorial/documentation is adapted from [PyTorch Data Loading Tutorial](https://pytorch.org/tutorials/beginner/data_loading_tutorial.html) to fit in LADI Dataset.  See [License](#License) section for information about license.*
-## Create Train and Test Sets
 
 Training neural networks with PyTorch follows the explicit steps. In this step, we will determine the control factor during the training process. 
 
@@ -19,7 +20,7 @@ from torch.optim import Adam
 ```python
 len(np.unique(label_damage['Answer']))
 ```
-Step 1: Create the optimizer and Loss function
+## Step 1: Create the optimizer and Loss function
 ```python 
 from torch.optim import Adam
 #Check the gpu support
@@ -34,7 +35,7 @@ optimizer = Adam(model.parameters(), lr=0.01, weight_decay=0.0001)
 loss_fn = nn.CrossEntropyLoss()
 ```
 
-Step 2: Write a function to adjust learning rates
+## Step 2: Write a function to adjust learning rates
 
 One of the main challenges when training deep neural networks is to balance the quality of the final solution with the training time it needs to get there. Learning rate is very criticle hyper-parameter to optimize this balance. 
 
@@ -69,7 +70,7 @@ def adjust_learning_rate(epoch):
     for param_group in optimizer.param_groups:
         param_group["lr"] = lr
 ```
-Step 3: Save and evaluate the model
+### Step 3: Save and evaluate the model
 ```python
 def save_models(epoch):
     torch.save(model.state_dict(), "cifar10model_{}.model".format(epoch))
