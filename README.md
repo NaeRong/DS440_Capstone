@@ -19,7 +19,7 @@ This documentation is about installing AWS tools and configuring AWS environment
 This documentation is about loading LADI dataset in PyTorch framework including examples of writing custom `Dataset`, `Transforms` and `Dataloader`.
 
 ## Train and Test A Classifier
-[Train and Test A Classifier](Tutorials/Train and Test A Classifier.md)
+[Train and Test A Classifier](https://github.com/NaeRong/DS440_Capstone/blob/master/Tutorials/Train%20and%20Test%20A%20Classifier.md)
 
 ## SimpleNet
 [SimpleNet](Tutorials/SimpleNet.md)
