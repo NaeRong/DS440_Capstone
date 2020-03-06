@@ -2,6 +2,7 @@
 - [Getting Started](#getting_started)
 - [Clean and Validate LADI Dataset](#clean_and_validate_ladi_dataset)
 - [PyTorch Data Loading](#pytorch_data_loading)
+- [Train and Test A Classifier](#train_and_test_a_classifier)
 - [SimpleNet](#simplenet)
  
 ## Getting Started
@@ -16,6 +17,9 @@ This documentation is about installing AWS tools and configuring AWS environment
 [PyTorch Data Loading](https://github.com/NaeRong/DS440_Capstone/blob/master/Tutorials/Pytorch%20Data%20Load.md) 
 
 This documentation is about loading LADI dataset in PyTorch framework including examples of writing custom `Dataset`, `Transforms` and `Dataloader`.
+
+## Train and Test A Classifier
+[Train and Test A Classifier](Tutorials/Train and Test A Classifier.md)
 
 ## SimpleNet
 [SimpleNet](Tutorials/SimpleNet.md)
