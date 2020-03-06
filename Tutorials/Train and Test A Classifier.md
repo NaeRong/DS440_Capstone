@@ -297,14 +297,14 @@ with torch.no_grad():
         total += labels.size(0)
         correct += (predicted == labels).sum().item()
 
-print('Accuracy of the network on the 1600 test images: %d %%' % (
+print('Accuracy of the network on the 400 test images: %d %%' % (
     100 * correct / total))
 ```
 
 Out:
 
 ```bash
-Accuracy of the network on the 1600 test images: 51 %
+Accuracy of the network on the 400 test images: 51 %
 ```
 
 In addition, we can look at the performance of the model on each class of `'damage:flood/water': True` and  `'damage:flood/water': False`. 
