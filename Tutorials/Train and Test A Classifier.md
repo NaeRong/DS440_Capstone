@@ -301,11 +301,10 @@ print('Accuracy of the network on the 1600 test images: %d %%' % (
     100 * correct / total))
 ```
 
-Out: (*awaiting results*)
+Out:
 
 ```bash
-
-
+Accuracy of the network on the 1600 test images: 51 %
 ```
 
 In addition, we can look at the performance of the model on each class of `'damage:flood/water': True` and  `'damage:flood/water': False`. 
@@ -315,7 +314,8 @@ class_correct = list(0. for i in range(2))
 class_total = list(0. for i in range(2))
 with torch.no_grad():
     for data in test_loader:
-        images, labels = data
+        images = data['image']
+        labels = data['damage:flood/water']
         outputs = net(images)
         _, predicted = torch.max(outputs, 1)
         c = (predicted == labels).squeeze()
@@ -333,7 +333,8 @@ for i in range(2):
 Out: (*awaiting results*)
 
 ```bash
-
+Accuracy of     0 : 98 %
+Accuracy of     1 :  2 %
 ```
 
 
