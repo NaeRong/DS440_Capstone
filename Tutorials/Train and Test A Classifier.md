@@ -330,13 +330,14 @@ for i in range(2):
         i, 100 * class_correct[i] / class_total[i]))
 ```
 
-Out: (*awaiting results*)
+Out: 
 
 ```bash
 Accuracy of     0 : 98 %
 Accuracy of     1 :  2 %
 ```
 
+*The result seems not good maybe because the negative samples including [damage:rubble], [damage:none], etc. make the network hard to classify. Or it is because we do not ensure the training set to be balanced. So, the result becomes one-sided. Or we need more samples or to train a more advanced network. To be continued after spring break* 
 
 ## License
 
