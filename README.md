@@ -1,8 +1,8 @@
 # Tutorials Guide
-- [Getting Started](#getting_started)
-- [Clean and Validate LADI Dataset](#clean_and_validate_ladi_dataset)
-- [PyTorch Data Loading](#pytorch_data_loading)
-- [Train and Test A Classifier](#train_and_test_a_classifier)
+- [Getting Started](#getting-started)
+- [Clean and Validate LADI Dataset](#clean-and-validate-ladi-dataset)
+- [PyTorch Data Loading](#pytorch-data-loading)
+- [Train and Test A Classifier](#train-and-test-a-classifier)
 - [SimpleNet](#simplenet)
  
 ## Getting Started
