@@ -75,7 +75,7 @@ flood_tiny_dataset = FloodTinyDataset(csv_file = csv_file,label_csv = label_csv)
 
 Note that one modification is that our labels are now `0` and `1`, corresponding with `False` and `True`. The reason is that the numerical labels are more compatible with our training process, especially with loss calculation.
 
-Our custom dataset `FloodTinyDataset` includes 2000 samples from the input `csv` files, one half of which are labeled `'damage:flood/water': True` and the other half are labeled `'damage:flood/water': False`. 
+Our custom dataset `FloodTinyDataset` includes 10000 samples from the input `csv` files, one half of which are labeled `'damage:flood/water': True` and the other half are labeled `'damage:flood/water': False`. 
 
 ### Transformed Dataset
 
@@ -124,7 +124,7 @@ test_loader = torch.utils.data.DataLoader(transformed_dataset, batch_size=batch_
                                                 sampler=test_sampler)
 ```
 
-The ratio of the number of training samples over that of testing samples is 8:2. *We will also evaluate the performance of 7:3 ratio in the future.* Now we have two `Dataloaders`. The `train_loader` can load training samples (size of `1600`) and `test_loader` can load testing samples (size of `400`).
+The ratio of the number of training samples over that of testing samples is 8:2. *We will also evaluate the performance of 7:3 ratio in the future.* Now we have two `Dataloaders`. The `train_loader` can load training samples (size of `8000`) and `test_loader` can load testing samples (size of `2000`).
 
 ## Train a Convolution Neural Network
 
@@ -181,7 +181,7 @@ optimizer = optim.SGD(net.parameters(), lr=0.001, momentum=0.9)
 Now, we start to train our network. We simply have to loop over our data iterator, and feed the inputs to the network and optimize.
 
 ```python
-for epoch in range(2):  # loop over the dataset multiple times
+for epoch in range(30):  # loop over the dataset multiple times
 
     running_loss = 0.0
     for i, data in enumerate(train_loader, 0):
@@ -203,8 +203,8 @@ for epoch in range(2):  # loop over the dataset multiple times
 
         # print statistics
         running_loss += loss.item()
-        #### 1600 images for training in total, batch size is 16
-        #### So, it should be 100 batches
+        #### 8000 images for training in total, batch size is 16
+        #### So, it should be 500 batches
         if i % 50 == 49:    # print every 50 mini-batches
             print('[%d, %3d] loss: %.3f' %
                   (epoch + 1, i + 1, running_loss / 50))
@@ -220,6 +220,11 @@ Out:
 [1,   100] loss: 0.697
 [2,    50] loss: 0.693
 [2,   100] loss: 0.694
+......
+[29,   50] loss: 0.655
+[29,  500] loss: 0.613
+[30,   50] loss: 0.676
+[30,  500] loss: 0.616
 Finished Training
 ```
 
@@ -297,14 +302,14 @@ with torch.no_grad():
         total += labels.size(0)
         correct += (predicted == labels).sum().item()
 
-print('Accuracy of the network on the 400 test images: %d %%' % (
+print('Accuracy of the network on the 2000 test images: %d %%' % (
     100 * correct / total))
 ```
 
 Out:
 
 ```bash
-Accuracy of the network on the 400 test images: 51 %
+Accuracy of the network on the 2000 test images: 64 %
 ```
 
 In addition, we can look at the performance of the model on each class of `'damage:flood/water': True` and  `'damage:flood/water': False`. 
@@ -333,11 +338,9 @@ for i in range(2):
 Out: 
 
 ```bash
-Accuracy of     0 : 98 %
-Accuracy of     1 :  2 %
+Accuracy of     0 : 72 %
+Accuracy of     1 : 56 %
 ```
-
-*The result seems not good maybe because the negative samples including [damage:rubble], [damage:none], etc. make the network hard to classify. Or it is because we do not ensure the training set to be balanced. So, the result becomes one-sided. Or we need more samples or to train a more advanced network. To be continued after spring break* 
 
 ## License
 
