@@ -205,7 +205,7 @@ for epoch in range(30):  # loop over the dataset multiple times
         running_loss += loss.item()
         #### 8000 images for training in total, batch size is 16
         #### So, it should be 500 batches
-        if i % 50 == 49:    # print every 50 mini-batches
+        if i % 250 == 249:    # print every 250 mini-batches
             print('[%d, %3d] loss: %.3f' %
                   (epoch + 1, i + 1, running_loss / 50))
             running_loss = 0.0
@@ -216,14 +216,14 @@ print('Finished Training')
 Out:
 
 ```bash
-[1,    50] loss: 0.711
-[1,   100] loss: 0.697
-[2,    50] loss: 0.693
-[2,   100] loss: 0.694
+[1,   250] loss: 0.697
+[1,   500] loss: 0.693
+[2,   250] loss: 0.694
+[2,   500] loss: 0.691
 ......
-[29,   50] loss: 0.655
+[29,  250] loss: 0.675
 [29,  500] loss: 0.613
-[30,   50] loss: 0.676
+[30,  250] loss: 0.650
 [30,  500] loss: 0.616
 Finished Training
 ```
