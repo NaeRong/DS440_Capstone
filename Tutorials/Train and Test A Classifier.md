@@ -267,7 +267,7 @@ print('GroundTruth: ', ' '.join('%5s' % labels[j] for j in range(16)))
 Out:
 
 ```bash
-GroundTruth:  tensor(1) tensor(1) tensor(0) tensor(0) tensor(0) tensor(0) tensor(1) tensor(0) tensor(0) tensor(0) tensor(0) tensor(0) tensor(0) tensor(0) tensor(0) tensor(0)
+GroundTruth:  tensor(1) tensor(1) tensor(1) tensor(0) tensor(0) tensor(1) tensor(1) tensor(1) tensor(1) tensor(1) tensor(1) tensor(0) tensor(0) tensor(0) tensor(0) tensor(1)
 ```
 Then, we can load the saved model and make some predictions on the images above.
 
@@ -285,7 +285,7 @@ print('Predicted: ', ' '.join('%5s' % predicted[j]
 Out:
 
 ```bash
-Predicted:  tensor(0) tensor(0) tensor(0) tensor(0) tensor(0) tensor(0) tensor(0) tensor(0) tensor(0) tensor(0) tensor(0) tensor(0) tensor(0) tensor(0) tensor(1) tensor(0)
+Predicted:  tensor(1) tensor(1) tensor(1) tensor(0) tensor(1) tensor(1) tensor(1) tensor(0) tensor(1) tensor(1) tensor(0) tensor(0) tensor(0) tensor(1) tensor(1) tensor(0)
 ```
 
 Now, we can look at how the trained network performs on the whole testing set.
