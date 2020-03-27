@@ -4,6 +4,7 @@
 - [PyTorch Data Loading](#pytorch-data-loading)
 - [Train and Test A Classifier](#train-and-test-a-classifier)
 - [SimpleNet](#simplenet)
+- [ResNet](#resnet)
  
 ## Getting Started
 [Getting Started](https://github.com/NaeRong/DS440_Capstone/blob/master/Tutorials/Getting%20Started.md) 
@@ -23,3 +24,5 @@ This documentation is about loading LADI dataset in PyTorch framework including 
 
 ## SimpleNet
 [SimpleNet](Tutorials/SimpleNet.md)
+## ResNet
+[Fine Tuning ResNet](Tutorials/Fine%20Tuning%20ResNet.md)
