@@ -199,7 +199,7 @@ def test(model, test_loader, criterion=nn.CrossEntropyLoss()):
 
             #correct += pred.eq(target.data.view_as(pred)).long().cpu().sum().item()
 
-    print('Accuracy of the network on the 2000 test images: %d %%' % (
+    print('Accuracy of the network on the 200 test images: %d %%' % (
     100 * correct / total))
 
 model_name = args.model_name
