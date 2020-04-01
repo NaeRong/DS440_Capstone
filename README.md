@@ -5,6 +5,7 @@
 - [Train and Test A Classifier](#train-and-test-a-classifier)
 - [SimpleNet](#simplenet)
 - [ResNet](#resnet)
+- [SageMaker - Build, Train, and Deploy ML Model](#sagemaker-build-train-and-deploy-ml-model)
  
 ## Getting Started
 [Getting Started](https://github.com/NaeRong/DS440_Capstone/blob/master/Tutorials/Getting%20Started.md) 
@@ -24,5 +25,9 @@ This documentation is about loading LADI dataset in PyTorch framework including 
 
 ## SimpleNet
 [SimpleNet](Tutorials/SimpleNet.md)
+
 ## ResNet
 [Fine Tuning ResNet](Tutorials/Fine%20Tuning%20ResNet.md)
+
+## SageMaker - Build, Train, and Deploy ML Model
+[SageMaker - Build, Train, and Deploy ML Model](Tutorials/SageMaker%20-%20Build,%20Train,%20and%20Deploy%20ML%20Model.md)
