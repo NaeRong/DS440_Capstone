@@ -35,11 +35,10 @@ After you have created and activated your account, you can choose to download LA
 
    ```shell
    $aws configure
-   AWS Access Key ID [None]: AKIAIOSFODNN7EXAMPLE
+   AWS Access Key ID [None]: 
    AWS Secret Access Key [None]:
-   aJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
-   Default region name [None]: us-west-2
-   Default output format [None]: json
+   Default region name [None]: 
+   Default output format [None]: 
    ```
 
    Please fill in each field step by step with your own values. The `AWS Access Key ID` and `AWS Secret Access Key` can be found by going to [Navigation Pane for Users](https://console.aws.amazon.com/iam/home#/users), choosing the IAM User that you just created, e.g. **Administrator**, clicking on the **Security credentials** tab and tapping the **Create access key** button.  
@@ -124,19 +123,20 @@ If you transferred LADI into your own AWS S3 bucket and prefer to not store the 
 
 1. To access the AWS S3 bucket import package Boto 3.
 
-   ```shell
-   $import bobo3
-   ```
-
 2. Initiate "clients" tool in Boto3.  “Clients” are low-level functional interfaces which are useful to load single files.
 
    ```python
    import pandas as pd
+   import boto3
    
+   #replace 'bucket name' to your s3 bucket name
+   bucket_name = 'bucket_name'
    #replace 'ladi_images_metadata.csv' with the path of the file that you want to read
    file_1_path = 'ladi_images_metadata.csv'
    obj_1 = client.get_object(Bucket = bucket_name, Key = file_1_path)
    image_metadata = pd.read_csv(obj_1['Body'])
+   #If you are loading tsv file
+   #ladi_response = pd.read_csv(obj_1['Body'],sep = '\t' )
    ```
 
    `obj` contains metadata of the file and the `Body` of the object contains actual data in a `StreamingBody` format. If we display first 10 rows in the `image_metadata`, we can get a table as following:
