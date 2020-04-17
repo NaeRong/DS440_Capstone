@@ -259,5 +259,9 @@ print('Predicted: ', ' '.join('%5s' % predicted[j]
                               for j in range(16)))
 ```
 ![img](https://github.com/NaeRong/DS440_Capstone/blob/master/Images/pred.png)
- 
 
+Output:
+```bash
+GroundTruth:  tensor(0) tensor(0) tensor(1) tensor(0) tensor(1) tensor(0) tensor(0) tensor(0) tensor(1) tensor(0) tensor(1) tensor(1) tensor(1) tensor(1) tensor(1) tensor(0)
+Predicted:  tensor(0) tensor(0) tensor(1) tensor(0) tensor(1) tensor(0) tensor(1) tensor(0) tensor(1) tensor(0) tensor(1) tensor(1) tensor(0) tensor(1) tensor(1) tensor(1)
+```
