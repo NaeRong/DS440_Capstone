@@ -275,11 +275,20 @@ print('Predicted: ', ' '.join('%5s' % predicted[j]
 ![img](https://github.com/NaeRong/DS440_Capstone/blob/master/Images/pred.png)
 
 Output:
-```bash
-GroundTruth:  tensor(0) tensor(0) tensor(1) tensor(0) tensor(1) tensor(0) tensor(0) tensor(0) tensor(1) tensor(0) tensor(1) tensor(1) tensor(1) tensor(1) tensor(1) tensor(0)
-Predicted:  tensor(0) tensor(0) tensor(1) tensor(0) tensor(1) tensor(0) tensor(1) tensor(0) tensor(1) tensor(0) tensor(1) tensor(1) tensor(0) tensor(1) tensor(1) tensor(1)
-```
 
+|Image|  1 	|  2 	|  3 	|  4 	|  5 	|  6 	|  7 	|  8 	|  9 	| 10 	| 11 	|  12	| 13 	| 14 	| 15 	| 16 |
+|---- |---	|---	|---	|---	|---	|---	|---	|---	|---	|---	|---	|---	|---	|---	|---	|--- |
+| True|  0 	|  0 	|  1 	|  0 	|  1 	|  0 	|  0 	|  0 	|  1 	|  0 	|  1 	|  1 	|  1 	|  1 	|  1 	| 0  |
+| Pred|  0 	|  0 	|  1 	|  0 	|  1 	|  0 	|  1 	|  0 	|  1 	|  0 	|  1 	|  1 	|  0 	|  1	|  1 	| 1  |
+
+## Model Accuracy 
+
+|     Model  	  | Epoch |   Accuracy	|
+|---------------|------	|------------	|
+|  ResNet 34 	  |  30	  |     72%    	|
+|  ResNet 50	  |  30	  |     75%    	|
+|  ResNet 101 	|  30	  |     77%    	|
+|  densenet 161	|  30	  |     77%    	|
 
 
 
