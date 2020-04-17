@@ -1,5 +1,6 @@
 # Tutorials Guide
 - [Getting Started](#getting-started)
+- [Getting Dataset](#getting-dataset)
 - [Clean and Validate LADI Dataset](#clean-and-validate-ladi-dataset)
 - [PyTorch Data Loading](#pytorch-data-loading)
 - [Train and Test A Classifier](#train-and-test-a-classifier)
@@ -11,8 +12,14 @@
 
 This documentation is about installing AWS tools and configuring AWS environment to download LADI dataset and load dataset in Python locally and remotely.
 
+## Getting Dataset 
+[Getting Dataset](https://github.com/NaeRong/DS440_Capstone/blob/master/Data) 
+
+This folder contains dataset with 2000 images and labels.
+
 ## Clean and Validate LADI Dataset
 [Clean and Validate LADI Dataset](https://github.com/NaeRong/DS440_Capstone/blob/master/Tutorials/Clean%20and%20Validate%20LADI%20Dataset.md)
+
 This documentation is about clean the LADI dataset. For this project, we have only extracted 2000 images for training.
 
 ## PyTorch Data Loading
