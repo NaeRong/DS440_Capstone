@@ -207,7 +207,7 @@ for epoch in range(0, args.epochs):
 ```
 ## Load saved models to predict image labels
 
-In this step, we used the existing model to predict the new dataset. 
+In this step, we are using the existing model to predict the new dataset. 
 
 ```python
 import torch
