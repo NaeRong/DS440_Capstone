@@ -9,7 +9,7 @@ To solve this problem, the ResNet proposed to use a reference to the previous la
 With the help of "skipped connection", ResNet reduces the network into only a few layers, which speeds the model learning process. When the network trains again, the identical layers expand and help the network explore more of the feature space.
 
 The diagram below illustrates the concept of skip connection. The figure on the left is stacking convolutional layer together one after another. On the right, it is staking the convolution layers as before but also add the original input to the output of the convolution block:
-#####Image 
+![img](https://github.com/NaeRong/DS440_Capstone/blob/master/Images/Skip_Connection.png)
 
 ## Initialize the pretrained model
 
@@ -257,6 +257,6 @@ _, predicted = torch.max(outputs, 1)
 print('Predicted: ', ' '.join('%5s' % predicted[j]
                               for j in range(16)))
 ```
-####Insert Image 
+![img](https://github.com/NaeRong/DS440_Capstone/blob/master/Images/pred.png)
  
 
