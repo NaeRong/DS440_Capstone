@@ -20,6 +20,7 @@ Also, cnn_finetune allows users to add a dropout layer or a custom pooling layer
 In this project, we are focusing on ResNet and AlexNet
 * ResNet (resnet18, resnet34, resnet50, resnet101, resnet152)
 * AlexNet (alexnet)
+* DenseNet (densenet161)
 
 Example usage:
 
@@ -34,8 +35,16 @@ AlexNet uses fully-connected layers, so the user has to additionally pass the in
 input_size is subject to change, depends on the image size under the Image Transform function.
 
 ```python
-model = make_model('alexnet', num_classes=2, pretrained=True, input_size=(256, 256))
+model = make_model('alexnet', num_classes=2, pretrained=True)
 ```
+
+* DenseNet:
+Dense Convolutional Network (DenseNet), connects each layer to every other layer in a feed-forward fashion. Whereas traditional convolutional networks with L layers have L connections - one between each layer and its subsequent layer - our network has L(L+1)/2 direct connections. For each layer, the feature-maps of all preceding layers are used as inputs, and its own feature-maps are used as inputs into all subsequent layers.
+
+```python
+model = make_model('densenet161', num_classes=2, pretrained=True)
+```
+
 ## Define Image Transforms
 
 Having a large dataset is crucial for the performance of the deep learning model. However, we can improve the performance of the model by augmenting the data we already have.
@@ -72,12 +81,17 @@ parser.add_argument('--no-cuda', action='store_true', default=False,
 parser.add_argument('--model-name', type=str, default='resnet34', metavar='M',
                     help='model name (default: resnet34)')
 ```
-User can use "to.device" to switch the training from using cpu to gpu.
+Users can use "to.device" to switch the training from using cpu to gpu.
 ```python
 args = parser.parse_args()
 use_cuda = not args.no_cuda and torch.cuda.is_available()
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 ```
+
+Users can change the `default` argument for `--model-name` to use various pretrained models, e.g. 'resnet34', 'resnet50', 'resnet101', 'alexnet', 'densenet161' and etc.
+
+For a full list of all pretrained model, users can visit [PyTorch Image Classification Models](https://pytorch.org/docs/stable/torchvision/models.html).
+
 ## Train model
 The train function handles the training and validation of a given model. As input, it takes a PyTorch model, a dictionary of dataloaders, a loss function, an optimizer, and a specified number of epochs to train and validate for. The train function also print loss values for every 2000 mini-batches.
 
@@ -260,13 +274,8 @@ print('Predicted: ', ' '.join('%5s' % predicted[j]
 ```
 ![img](https://github.com/NaeRong/DS440_Capstone/blob/master/Images/pred.png)
 
-## Model accuracy 
-
-|   Models    | Epoch  |  Accuracy |
-|-------------|--------|-----------|
-| ResNet 34   |   30   |     72%   |
-| ResNet 50   |   30   |     75%   |
-| ResNet 101  |   30   |     77%   |
-| DenseNet 161|   30   |     77%   |
- 
-
+Output:
+```bash
+GroundTruth:  tensor(0) tensor(0) tensor(1) tensor(0) tensor(1) tensor(0) tensor(0) tensor(0) tensor(1) tensor(0) tensor(1) tensor(1) tensor(1) tensor(1) tensor(1) tensor(0)
+Predicted:  tensor(0) tensor(0) tensor(1) tensor(0) tensor(1) tensor(0) tensor(1) tensor(0) tensor(1) tensor(0) tensor(1) tensor(1) tensor(0) tensor(1) tensor(1) tensor(1)
+```
