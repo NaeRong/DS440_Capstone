@@ -1,17 +1,5 @@
 # Fine Tuning Torchvision Models 
 
-### What is a ResNet Neural Network?
-
-ResNet is a CNN architecture which can support hundred or more convolutional layers. The model solves the problem of vanishing gradients - as the gradient is back-propagated to an earlier layer, repeated multiplication may make the gradient extremely small. Basically, the deeper the harder to train a neural network.
-
-To solve this problem, the ResNet proposed to use a reference to the previous layer to compute the output at a given layer. In ResNet, the output from the previous layer, called residual, is added to the output of the current layer. 
-
-With the help of "skipped connection", ResNet reduces the network into only a few layers, which speeds the model learning process. When the network trains again, the identical layers expand and help the network explore more of the feature space.
-
-The diagram below illustrates the concept of skip connection. The figure on the left is stacking convolutional layer together one after another. On the right, it is staking the convolution layers as before but also add the original input to the output of the convolution block:
-
-![img](https://github.com/NaeRong/DS440_Capstone/blob/master/Images/Skip_Connection.png)
-
 ## Initialize the pretrained model
 
 Pytorch provides cnn_finetune, which includes multiple deep learning models, pre-trained on the ImageNet dataset. The package automatically replaces classifier on top of the network, which allows the user to train a network with a dataset that has a different number of classes. 
@@ -21,13 +9,15 @@ In this project, we are focusing on ResNet and AlexNet
 * ResNet (resnet18, resnet34, resnet50, resnet101, resnet152)
 * AlexNet (alexnet)
 * DenseNet (densenet161)
+* MobileNet (mobilenet)
 
 Example usage:
 
-* ResNet: 
+* ResNet/DenseNet/MobileNet: 
 ```python
 from cnn_finetune import make_model
 model = make_model('resnet18', num_classes=2, pretrained=True)
+#User can change 'resnet18' to your model name
 ```
 * AlexNet:
 AlexNet uses fully-connected layers, so the user has to additionally pass the input size of images when constructing a new model. The information is needed to determine the input size of fully-connected layers.
@@ -93,7 +83,7 @@ Users can change the `default` argument for `--model-name` to use various pretra
 For a full list of all pretrained model, users can visit [PyTorch Image Classification Models](https://pytorch.org/docs/stable/torchvision/models.html).
 
 ## Train model
-The train function handles the training and validation of a given model. As input, it takes a PyTorch model, a dictionary of dataloaders, a loss function, an optimizer, and a specified number of epochs to train and validate for. The train function also print loss values for every 2000 mini-batches.
+The train function handles the training and validation of a given model. As input, it takes a PyTorch model, a dictionary of dataloaders, a loss function, an optimizer, and a specified number of epochs to train and validate for. The train function also print loss values for every 20 mini-batches.
 
 ```python
 def train(model, epoch, optimizer, train_loader, criterion=nn.CrossEntropyLoss()):
@@ -120,9 +110,9 @@ def train(model, epoch, optimizer, train_loader, criterion=nn.CrossEntropyLoss()
         loss.backward()
         optimizer.step()
 
-        if i % 2000 == 1999:   
+        if i % 20 == 19:   
             print('[%d, %3d] loss: %.3f' %
-                  (epoch + 1, i + 1, running_loss / 2000))
+                  (epoch + 1, i + 1, running_loss / 20))
             running_loss = 0.0
 
 print('Finished Training')
@@ -193,6 +183,7 @@ Parameter Tuning Example: (define new parameter using "parser.add_argument" func
 * Change the batch size from 4 to 16
 * Change the learing rate from 0.1 to 0.01
 
+### ResNet / DenseNet / MobileNet
 ```python
 model_name = 'resnet50_2_58.pth'
 PATH = f"/content/drive/My Drive/{model_name}" 
@@ -219,9 +210,18 @@ for epoch in range(0, args.epochs):
   train(model, epoch, optimizer, train_loader)
   test(model, test_loader)
 ```
+### AlexNet
+```python
+model = make_model(
+        model_name,
+        pretrained=True,
+        num_classes=2,
+        input_size= (256,256),
+    )
+```
 ## Load saved models to predict image labels
 
-In this step, we are using the existing model to predict the new dataset. 
+In this step, we are using the existing model to predict the new dataset. As the result, we can observe the label prediction on 8 images.
 
 ```python
 import torch
@@ -270,16 +270,10 @@ outputs = model(images)
 _, predicted = torch.max(outputs, 1)
 
 print('Predicted: ', ' '.join('%5s' % predicted[j]
-                              for j in range(16)))
+                              for j in range(8)))
 ```
 ![img](https://github.com/NaeRong/DS440_Capstone/blob/master/Images/pred.png)
 
-Output:
-
-|Image|  1 	|  2 	|  3 	|  4 	|  5 	|  6 	|  7 	|  8 	|  9 	| 10 	| 11 	|  12	| 13 	| 14 	| 15 	| 16 |
-|---- |---	|---	|---	|---	|---	|---	|---	|---	|---	|---	|---	|---	|---	|---	|---	|--- |
-| True|  0 	|  0 	|  1 	|  0 	|  1 	|  0 	|  0 	|  0 	|  1 	|  0 	|  1 	|  1 	|  1 	|  1 	|  1 	| 0  |
-| Pred|  0 	|  0 	|  1 	|  0 	|  1 	|  0 	|  1 	|  0 	|  1 	|  0 	|  1 	|  1 	|  0 	|  1	|  1 	| 1  |
 
 ## Model Accuracy 
 
