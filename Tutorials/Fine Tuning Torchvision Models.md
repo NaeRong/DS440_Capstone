@@ -13,7 +13,7 @@ In this project, we are focusing on ResNet and AlexNet
 
 Example usage:
 
-* ResNet/DenseNet/MobileNet: 
+* ResNet: 
 ```python
 from cnn_finetune import make_model
 model = make_model('resnet18', num_classes=2, pretrained=True)
@@ -34,7 +34,11 @@ Dense Convolutional Network (DenseNet), connects each layer to every other layer
 ```python
 model = make_model('densenet161', num_classes=2, pretrained=True)
 ```
-
+* MobileNet:
+MobileNets are based on a streamlined architecture that uses depth-wise separable convolutions to build light weight deep neural networks. MobileNets is very efficient for mobile and embedded vision applications. This model will be helpful for the future implementation on hardware.
+```python
+model = make_model('mobilenet', num_classes=2, pretrained=True)
+```
 ## Define Image Transforms
 
 Having a large dataset is crucial for the performance of the deep learning model. However, we can improve the performance of the model by augmenting the data we already have.
@@ -45,7 +49,7 @@ The image transforms are made using the torchvision.transforms library.
 transformed_dataset = FloodTinyDataset(csv_file=csv_file, 
 label_csv = label_csv, transform=transforms.Compose([transforms.Resize(256),
 transforms.RandomRotation(10),
-transforms.RandomCrop(224),
+transforms.RandomCrop(256),
 transforms.RandomHorizontalFlip(), 
 transforms.ToTensor()
 ]))
