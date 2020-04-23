@@ -1,4 +1,4 @@
-# Fine Tuning Torchvision Models 
+6# Fine Tuning Torchvision Models 
 
 ## Initialize the pretrained model
 
@@ -235,7 +235,7 @@ PATH = '/content/drive/My Drive/resnet50_2_58.pth'
 def imshow(img):
     #img = img / 2 + 0.5     # unnormalize
     npimg = img.numpy()
-    plt.figure(figsize=[16, 16])
+    plt.figure(figsize=[8, 8])
     plt.imshow(np.transpose(npimg, (1, 2, 0)))
     plt.show()
 
@@ -247,7 +247,7 @@ labels = dataiter.next()['label']
 # print images
 classes = (0, 1)
 imshow(torchvision.utils.make_grid(images))
-print('GroundTruth: ', ' '.join('%5s' % labels[j] for j in range(16)))
+print('GroundTruth: ', ' '.join('%5s' % labels[j] for j in range(8)))
 
 checkpoint = torch.load(PATH)
 
