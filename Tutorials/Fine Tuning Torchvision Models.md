@@ -291,7 +291,7 @@ Please reference confusion_matrix.py and plot_confusion_matrix.py under Model_sc
 |  densenet 161	|  30	  |     77%    	|
 |  ResNet 101 	|  30	  |     79%    	|
 
-# Confusion Matrix for ResNet 101 
+## Confusion Matrix for ResNet 101 
 
 The true positives rate and true negatives rate are both about 80%, which indicate a good precision and recall of our model. 
 
