@@ -1,4 +1,4 @@
-6# Fine Tuning Torchvision Models 
+# Fine Tuning Torchvision Models 
 
 ## Initialize the pretrained model
 
@@ -280,15 +280,22 @@ print('Predicted: ', ' '.join('%5s' % predicted[j]
 
 
 ## Model Accuracy 
+Please reference confusion_matrix.py and plot_confusion_matrix.py under Model_scripts, for more details on computing confusion matrix and model accuracy.
 
 |     Model  	  | Epoch |   Accuracy	|
 |---------------|------	|------------	|
+|  AlexNet      |  30   |     72%     | 
 |  ResNet 34 	  |  30	  |     72%    	|
+|  Mobilenet    |  30   |     73%     |
 |  ResNet 50	  |  30	  |     75%    	|
-|  AlexNet      |  30   |     76%     | 
-|  ResNet 101 	|  30	  |     77%    	|
 |  densenet 161	|  30	  |     77%    	|
+|  ResNet 101 	|  30	  |     79%    	|
 
+# Confusion Matrix for ResNet 101 
+
+The true positives rate and true negatives rate are both about 80%, which indicate a good precision and recall of our model. 
+
+![img](https://github.com/NaeRong/DS440_Capstone/blob/master/Images/cm.png)
 
 
 
