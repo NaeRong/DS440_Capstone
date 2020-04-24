@@ -291,13 +291,25 @@ Please reference confusion_matrix.py and plot_confusion_matrix.py under Model_sc
 |  densenet 161	|  30	  |     77%    	|
 |  ResNet 101 	|  30	  |     79%    	|
 
+### AlexNet model
+[This link](https://github.com/NaeRong/DS440_Capstone/blob/master/master/Tutorials/Model%20Script/alexnet.py)
+
+### ResNet 34 model
+[This link](https://github.com/NaeRong/DS440_Capstone/blob/master/master/Tutorials/Model%20Script/resnset34.py)
+
+### ResNet 101 model
+[This link](https://github.com/NaeRong/DS440_Capstone/blob/master/master/Tutorials/Model%20Script/resnset101.py)
+
 ## Confusion Matrix for ResNet 101 
 
 The true positives rate and true negatives rate are both about 80%, which indicate a good precision and recall of our model. 
 
 ![img](https://github.com/NaeRong/DS440_Capstone/blob/master/Images/cm.png)
 
-
+### Script to compute Confusion Matrix 
+[This link](https://github.com/NaeRong/DS440_Capstone/blob/master/master/Tutorials/Model%20Script/Confusion_Matrix.py)
+### Script to compute Confusion Matrix Plot 
+[This link](https://github.com/NaeRong/DS440_Capstone/blob/master/master/Tutorials/Model%20Script/Plot_Confusion_Matrix.py)
 
 ## License
 
