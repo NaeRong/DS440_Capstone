@@ -285,8 +285,10 @@ print('Predicted: ', ' '.join('%5s' % predicted[j]
 |---------------|------	|------------	|
 |  ResNet 34 	  |  30	  |     72%    	|
 |  ResNet 50	  |  30	  |     75%    	|
+|  AlexNet      |  30   |     76%     | 
 |  ResNet 101 	|  30	  |     77%    	|
 |  densenet 161	|  30	  |     77%    	|
+
 
 
 
