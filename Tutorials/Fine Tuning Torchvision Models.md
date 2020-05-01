@@ -280,35 +280,48 @@ print('Predicted: ', ' '.join('%5s' % predicted[j]
 
 
 ## Model Accuracy 
-Please reference confusion_matrix.py and plot_confusion_matrix.py under Model_scripts, for more details on computing confusion matrix and model accuracy.
 
-|     Model  	  | Epoch |   Accuracy	|
-|---------------|------	|------------	|
-|  AlexNet      |  30   |     72%     | 
-|  ResNet 34 	  |  30	  |     72%    	|
-|  Mobilenet    |  30   |     73%     |
-|  ResNet 50	  |  30	  |     75%    	|
-|  densenet 161	|  30	  |     77%    	|
-|  ResNet 101 	|  30	  |     79%    	|
+The accuracy and size for each model is shown in the table. Our ResNet 101 model can achieve the best accuracy of 79%. Our MobileNet V2 has a very small model size of 17 MB compared to other models, so it has the potential to be deployed on a hardware device. 
 
-### AlexNet model
+In terms of future improvement, we are looking into fine-tuning the MobilNetV2 and ResNet 101 models with more images. 
+
+
+
+|     Model  	  | Epoch |   Accuracy	| Model Size (MB)|
+|---------------|------	|------------	|----------------|
+|  ResNet 34 	  |  30	  |     72%    	|       163      |
+|  MobilenetV2  |  30   |     73%     |       17       |
+|  ResNet 50	  |  30	  |     75%    	|       180      |
+|  AlexNet      |  30   |     76%     |       539      | 
+|  densenet 161	|  30	  |     77%    	|       203      |
+|  ResNet 101 	|  30	  |     79%    	|       325      |
+
+### Python Scripts 
+* AlexNet model
 [This link](https://github.com/NaeRong/DS440_Capstone/blob/master/Tutorials/Model%20Script/alexnet.py)
 
-### ResNet 34 model
+* ResNet 34 model
 [This link](https://github.com/NaeRong/DS440_Capstone/blob/master/Tutorials/Model%20Script/resnset34.py)
 
-### ResNet 101 model
+* ResNet 101 model
 [This link](https://github.com/NaeRong/DS440_Capstone/blob/master/Tutorials/Model%20Script/resnset101.py)
+
+* DenseNet 161 model
+[This link](https://github.com/NaeRong/DS440_Capstone/blob/master/Tutorials/Model%20Script/densenet.py)
+
+* Mobilenet V2 model
+[This link](https://github.com/NaeRong/DS440_Capstone/blob/master/Tutorials/Model%20Script/mobilenetv2.py)
 
 ## Confusion Matrix for ResNet 101 
 
-The true positives rate and true negatives rate are both about 80%, which indicate a good precision and recall of our model. 
+The true positives rate and true negatives rate are both about 80%, which indicates a good precision / recall of our model. 
 
 ![img](https://github.com/NaeRong/DS440_Capstone/blob/master/Images/cm.png)
 
-### Script to compute Confusion Matrix 
+### Python Script for Confusion Matrix
+* Confusion Matrix 
 [This link](https://github.com/NaeRong/DS440_Capstone/blob/master/Tutorials/Model%20Script/Confusion_Matrix.py)
-### Script to compute Confusion Matrix Plot 
+* Confusion Matrix Plot 
 [This link](https://github.com/NaeRong/DS440_Capstone/blob/master/Tutorials/Model%20Script/Plot_Confusion_Matrix.py)
 
 ## License
