@@ -35,3 +35,4 @@
 ![img](https://github.com/NaeRong/DS440_Capstone/blob/master/Images/sagemaker7.png)
 
 ## Step 3: Prepare the data
+<To be continue .... >
