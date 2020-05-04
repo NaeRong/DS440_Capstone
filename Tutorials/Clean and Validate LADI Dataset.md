@@ -7,7 +7,7 @@
 
 For our first approach, we will use human generated labels as the most accurate feature to represent each image. Our goal is to clean and validate the LADI dataset so that we can use them to train our image classification model. 
 
-The image url can have multiple labels associated to it. Therefore, for workers that gave multiple labels in ancwer, you should seperate each of the labels withint the answer. The single response shows all the labels that one worker gave withint a single category.
+The image url can have multiple labels associated to it. Therefore, for workers that gave multiple labels in answer, you should seperate each of the labels withint the answer. The single response shows all the labels that one worker gave withint a single category.
 
 Human generated labels cover 20% of the total images in the dataset. 
 
