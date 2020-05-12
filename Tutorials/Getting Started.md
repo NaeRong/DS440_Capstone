@@ -1,14 +1,17 @@
 # LADI Dataset Documentation
-- [Download](#download)
-  * [Using AWS S3 Console](#using_aws_s3_console)
-    + [Download LADI to Local Machine with AWS Command Line Interface](#download_ladi_to_local_machine_with_aws_command_line_interface)
-     + [Transfer LADI to Your Own S3 Bucket](#transfer_ladi_to_your_own_s3_bucket)
-  * [Access and Download LADI Data via Web Browser](#access_and_download_ladi_data_via_web_browser)
-- [Load LADI in Python 3](#load_ladi_in_python3)
-  * [LADI Stored in S3 Bucket](#ladi_stored_in_s3_bucket)
-  * [LADI Stored in Local Machine](#ladi_stored_in_local_machine)
 
-# Download
+- [LADI Dataset Documentation](#ladi-dataset-documentation)
+  - [Download](#download)
+  - [Using AWS S3 Console](#using-aws-s3-console)
+    - [Download LADI to Local Machine with AWS Command Line Interface](#download-ladi-to-local-machine-with-aws-command-line-interface)
+    - [Transfer LADI to Your Own S3 Bucket](#transfer-ladi-to-your-own-s3-bucket)
+  - [Access and Download LADI Data via Web Browser](#access-and-download-ladi-data-via-web-browser)
+- [Load LADI in Python3](#load-ladi-in-python3)
+  - [LADI Stored in S3 Bucket](#ladi-stored-in-s3-bucket)
+  - [LADI Stored in Local Machine](#ladi-stored-in-local-machine)
+  - [Distribution Statement](#distribution-statement)
+
+## Download
 
 Data in LADI is stored in AWS S3 storage. To access or download images, metadata, and labels in LADI, you can optionally choose to work with Amazon AWS Console or not.
 
@@ -160,3 +163,7 @@ im = Image.open(image_path)
 plt.imshow(im, cmap='Greys_r')
 ```
 ![img](https://github.com/NaeRong/DS440_Capstone/blob/master/Images/010_0775_4365f589-de67-4561-8fdd-f1ac1ac1ae07.jpg)
+
+## Distribution Statement
+
+[BSD -Clause License](https://github.com/LADI-Dataset/ladi-tutorial/blob/master/LICENSE)

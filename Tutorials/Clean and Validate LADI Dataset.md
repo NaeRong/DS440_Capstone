@@ -1,7 +1,9 @@
 # Clean and Validate LADI Dataset
-- [Clean and validate dataset](#clean_and_validate_ladi_dataset)
-  * [Clean the aggregated Responses .tsv file](#clean_the_aggregated_responses_.tsv_file)
-  * [Generate True/False label](#generate_true/false_label)
+
+- [Clean and Validate LADI Dataset](#clean-and-validate-ladi-dataset)
+  - [Clean the aggregated Responses .tsv file](#clean-the-aggregated-responses-tsv-file)
+  - [Generate True/False label](#generate-truefalse-label)
+  - [Distribution Statement](#distribution-statement)
 
 ## Clean the aggregated Responses .tsv file
 
@@ -132,3 +134,7 @@ label_df = pd.DataFrame(label_data, columns = ['s3_path', 'label'])
 flood_tiny_metadata.to_csv('/content/drive/My Drive/Colab Notebooks/DS440_data/flood_tiny_metadata.csv')
 label_df.to_csv('/content/drive/My Drive/Colab Notebooks/DS440_data/flood_tiny_label.csv')
 ```
+
+## Distribution Statement
+
+[BSD -Clause License](https://github.com/LADI-Dataset/ladi-tutorial/blob/master/LICENSE)

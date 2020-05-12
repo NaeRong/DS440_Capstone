@@ -1,15 +1,32 @@
-# Fine Tuning Torchvision Models 
+# Fine Tuning Torchvision Models
+
+- [Fine Tuning Torchvision Models](#fine-tuning-torchvision-models)
+  - [Initialize the pretrained model](#initialize-the-pretrained-model)
+  - [Define Image Transforms](#define-image-transforms)
+  - [Define model parameters](#define-model-parameters)
+  - [Train model](#train-model)
+  - [Test Model](#test-model)
+  - [Run Training and Testing Step](#run-training-and-testing-step)
+  - [Saving and loading models for parameter tuning](#saving-and-loading-models-for-parameter-tuning)
+    - [ResNet / DenseNet / MobileNet](#resnet--densenet--mobilenet)
+    - [AlexNet](#alexnet)
+  - [Load saved models to predict image labels](#load-saved-models-to-predict-image-labels)
+  - [Model Accuracy](#model-accuracy)
+    - [Python Scripts](#python-scripts)
+  - [Confusion Matrix for ResNet 101](#confusion-matrix-for-resnet-101)
+    - [Python Script for Confusion Matrix](#python-script-for-confusion-matrix)
+  - [Distribution Statement](#distribution-statement)
 
 ## Initialize the pretrained model
 
-Pytorch provides cnn_finetune, which includes multiple deep learning models, pre-trained on the ImageNet dataset. The package automatically replaces classifier on top of the network, which allows the user to train a network with a dataset that has a different number of classes. 
-Also, cnn_finetune allows users to add a dropout layer or a custom pooling layer. 
+Pytorch provides `cnn_finetune`, which includes multiple deep learning models, pre-trained on the ImageNet dataset. The package automatically replaces classifier on top of the network, which allows the user to train a network with a dataset that has a different number of classes. 
+Also, `cnn_finetune` allows users to add a dropout layer or a custom pooling layer.
 
 In this project, we are focusing on ResNet and AlexNet
-* ResNet (resnet18, resnet34, resnet50, resnet101, resnet152)
-* AlexNet (alexnet)
-* DenseNet (densenet161)
-* MobileNet (mobilenet)
+- ResNet (resnet18, resnet34, resnet50, resnet101, resnet152)
+- AlexNet (alexnet)
+- DenseNet (densenet161)
+- MobileNet (mobilenet)
 
 Example usage:
 
@@ -39,6 +56,7 @@ MobileNets are based on a streamlined architecture that uses depth-wise separabl
 ```python
 model = make_model('mobilenet', num_classes=2, pretrained=True)
 ```
+
 ## Define Image Transforms
 
 Having a large dataset is crucial for the performance of the deep learning model. However, we can improve the performance of the model by augmenting the data we already have.
@@ -50,14 +68,15 @@ transformed_dataset = FloodTinyDataset(csv_file=csv_file,
 label_csv = label_csv, transform=transforms.Compose([transforms.Resize(256),
 transforms.RandomRotation(10),
 transforms.RandomCrop(256),
-transforms.RandomHorizontalFlip(), 
+transforms.RandomHorizontalFlip(),
 transforms.ToTensor()
 ]))
 ```
+
 ## Define model parameters
 
 This section defines all the model parameters. Users can reference the parameter by calling args.{argument}.
-For this project, we have defined batch-size / number of epochs / learning rate / momentum / use of Cuda / model name. All the parameters are subject to change and add depends on the user preference. 
+For this project, we have defined batch-size / number of epochs / learning rate / momentum / use of Cuda / model name. All the parameters are subject to change and add depends on the user preference.
 
 ```python
 parser = argparse.ArgumentParser(description='cnn_finetune')
@@ -87,6 +106,7 @@ Users can change the `default` argument for `--model-name` to use various pretra
 For a full list of all pretrained model, users can visit [PyTorch Image Classification Models](https://pytorch.org/docs/stable/torchvision/models.html).
 
 ## Train model
+
 The train function handles the training and validation of a given model. As input, it takes a PyTorch model, a dictionary of dataloaders, a loss function, an optimizer, and a specified number of epochs to train and validate for. The train function also print loss values for every 20 mini-batches.
 
 ```python
@@ -121,7 +141,9 @@ def train(model, epoch, optimizer, train_loader, criterion=nn.CrossEntropyLoss()
 
 print('Finished Training')
 ```
+
 ## Test Model
+
 ```python
 def test(model, test_loader, criterion=nn.CrossEntropyLoss()):
     model.eval()
@@ -146,6 +168,7 @@ def test(model, test_loader, criterion=nn.CrossEntropyLoss()):
     print('Accuracy of the network on the 200 test images: %d %%' % (
     100 * correct / total))
 ```
+
 ## Run Training and Testing Step
 Finally, the last step is to setup the loss for the model, then run the training and testing function for the set number of epochs.
 In this step, we also create an optimizer that only updates the desired parameters. To construct an Optimizer you have to give it an iterable containing the parameters (all should be Variable s) to optimize. Then, you can specify optimizer-specific options such as the learning rate, weight decay, etc.
@@ -176,11 +199,12 @@ for epoch in range(1, args.epochs):
   train(model, epoch, optimizer, train_loader)
   test(model, test_loader)
 ```
+
 ## Saving and loading models for parameter tuning
 
-In PyTorch, the user can save the trained model into a .pt or .pth file extension. In this case, we are saving the resnet50 model as "resnet50_2_58.pth". By referencing the path, PyTorch will load the model's parameter. Users can define a new set of model parameters before this step. 
+In PyTorch, the user can save the trained model into a .pt or .pth file extension. In this case, we are saving the resnet50 model as "resnet50_2_58.pth". By referencing the path, PyTorch will load the model's parameter. Users can define a new set of model parameters before this step.
 
-In this step, we used the existing model to predict the new dataset. 
+In this step, we used the existing model to predict the new dataset.
 
 Parameter Tuning Example: (define new parameter using "parser.add_argument" function)
 * Change the number of epochs from 30 to 50 
@@ -188,6 +212,7 @@ Parameter Tuning Example: (define new parameter using "parser.add_argument" func
 * Change the learing rate from 0.1 to 0.01
 
 ### ResNet / DenseNet / MobileNet
+
 ```python
 model_name = 'resnet50_2_58.pth'
 PATH = f"/content/drive/My Drive/{model_name}" 
@@ -214,7 +239,9 @@ for epoch in range(0, args.epochs):
   train(model, epoch, optimizer, train_loader)
   test(model, test_loader)
 ```
+
 ### AlexNet
+
 ```python
 model = make_model(
         model_name,
@@ -223,6 +250,7 @@ model = make_model(
         input_size= (256,256),
     )
 ```
+
 ## Load saved models to predict image labels
 
 In this step, we are using the existing model to predict the new dataset. As the result, we can observe the label prediction on 8 images.
@@ -276,82 +304,43 @@ _, predicted = torch.max(outputs, 1)
 print('Predicted: ', ' '.join('%5s' % predicted[j]
                               for j in range(8)))
 ```
-![img](https://github.com/NaeRong/DS440_Capstone/blob/master/Images/pred.png)
 
+![pred.png](./Images/pred.png)
 
-## Model Accuracy 
+## Model Accuracy
 
-The accuracy and size for each model is shown in the table. Our ResNet 101 model can achieve the best accuracy of 79%. Our MobileNet V2 has a very small model size of 17 MB compared to other models, so it has the potential to be deployed on a hardware device. 
+The accuracy and size for each model is shown in the table. Our ResNet 101 model can achieve the best accuracy of 79%. Our MobileNet V2 has a very small model size of 17 MB compared to other models, so it has the potential to be deployed on a hardware device.
 
-In terms of future improvement, we are looking into fine-tuning the MobilNetV2 and ResNet 101 models with more images. 
+In terms of future improvement, we are looking into fine-tuning the MobilNetV2 and ResNet 101 models with more images.
 
-
-
-|     Model  	  | Epoch |   Accuracy	| Model Size (MB)|
-|---------------|------	|------------	|----------------|
-|  ResNet 34 	  |  30	  |     72%    	|       163      |
+|     Model    | Epoch |   Accuracy| Model Size (MB)|
+|---------------|------|------------|----------------|
+|  ResNet 34   |  30  |     72%    |       163      |
 |  MobilenetV2  |  30   |     73%     |       17       |
-|  ResNet 50	  |  30	  |     75%    	|       180      |
-|  AlexNet      |  30   |     76%     |       539      | 
-|  densenet 161	|  30	  |     77%    	|       203      |
-|  ResNet 101 	|  30	  |     79%    	|       325      |
+|  ResNet 50  |  30  |     75%    |       180      |
+|  AlexNet      |  30   |     76%     |       539      |
+|  densenet 161|  30  |     77%    |       203      |
+|  ResNet 101 |  30  |     79%    |       325      |
 
-### Python Scripts 
-* AlexNet model
-[This link](https://github.com/NaeRong/DS440_Capstone/blob/master/Tutorials/Model%20Script/alexnet.py)
+### Python Scripts
 
-* ResNet 34 model
-[This link](https://github.com/NaeRong/DS440_Capstone/blob/master/Tutorials/Model%20Script/resnset34.py)
+- [AlexNet model](https://github.com/NaeRong/DS440_Capstone/blob/master/Tutorials/Model%20Script/alexnet.py)
+- [ResNet 34 model](https://github.com/NaeRong/DS440_Capstone/blob/master/Tutorials/Model%20Script/resnset34.py)
+- [ResNet 101 model](https://github.com/NaeRong/DS440_Capstone/blob/master/Tutorials/Model%20Script/resnset101.py)
+- [DenseNet 161 model](https://github.com/NaeRong/DS440_Capstone/blob/master/Tutorials/Model%20Script/densenet.py)
+- [Mobilenet V2 model](https://github.com/NaeRong/DS440_Capstone/blob/master/Tutorials/Model%20Script/mobilenetv2.py)
 
-* ResNet 101 model
-[This link](https://github.com/NaeRong/DS440_Capstone/blob/master/Tutorials/Model%20Script/resnset101.py)
+## Confusion Matrix for ResNet 101
 
-* DenseNet 161 model
-[This link](https://github.com/NaeRong/DS440_Capstone/blob/master/Tutorials/Model%20Script/densenet.py)
+The true positives rate and true negatives rate are both about 80%, which indicates a good precision / recall of our model.
 
-* Mobilenet V2 model
-[This link](https://github.com/NaeRong/DS440_Capstone/blob/master/Tutorials/Model%20Script/mobilenetv2.py)
-
-## Confusion Matrix for ResNet 101 
-
-The true positives rate and true negatives rate are both about 80%, which indicates a good precision / recall of our model. 
-
-![img](https://github.com/NaeRong/DS440_Capstone/blob/master/Images/cm.png)
+![confusionmatrix](./Images/cm.png)
 
 ### Python Script for Confusion Matrix
-* Confusion Matrix 
-[This link](https://github.com/NaeRong/DS440_Capstone/blob/master/Tutorials/Model%20Script/Confusion_Matrix.py)
-* Confusion Matrix Plot 
-[This link](https://github.com/NaeRong/DS440_Capstone/blob/master/Tutorials/Model%20Script/Plot_Confusion_Matrix.py)
 
-## License
+- [Confusion Matrix](https://github.com/NaeRong/DS440_Capstone/blob/master/Tutorials/Model%20Script/Confusion_Matrix.py)
+- [Confusion Matrix Plot](https://github.com/NaeRong/DS440_Capstone/blob/master/Tutorials/Model%20Script/Plot_Confusion_Matrix.py)
 
-[BSD 3-Clause License](https://github.com/pytorch/tutorials/blob/master/LICENSE)
+## Distribution Statement
 
-Copyright (c) 2017, Pytorch contributors
-All rights reserved.
-
-Redistribution and use in source and binary forms, with or without
-modification, are permitted provided that the following conditions are met:
-
-* Redistributions of source code must retain the above copyright notice, this
-  list of conditions and the following disclaimer.
-
-* Redistributions in binary form must reproduce the above copyright notice,
-  this list of conditions and the following disclaimer in the documentation
-  and/or other materials provided with the distribution.
-
-* Neither the name of the copyright holder nor the names of its
-  contributors may be used to endorse or promote products derived from
-  this software without specific prior written permission.
-
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
-FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+[BSD -Clause License](https://github.com/LADI-Dataset/ladi-tutorial/blob/master/LICENSE)

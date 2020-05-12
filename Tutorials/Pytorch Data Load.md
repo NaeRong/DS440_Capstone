@@ -1,20 +1,20 @@
 # LADI In PyTorch Framework
 
-**Table of Contents**
 
-- [Introduction](#introduction)
-- [Prerequisite](#prerequisite)
-- [Write Custom Dataset From LADI](#write-custom-dataset-from-ladi)
-- [Image Tranforms](#image-tranforms)
-  - [Some Basic Transforms](#some-basic-transforms)
-    - [torchvision.transforms.Resize(<em>size</em>, <em>interpolation=2</em>)](#torchvisiontransformsresizesize-interpolation2)
-    - [torchvision.transforms.RandomCrop(<em>size</em>, <em>padding=None</em>, <em>pad_if_needed=False</em>, <em>fill=0</em>, <em>padding_mode='constant'</em>)](#torchvisiontransformsrandomcropsize-paddingnone-pad_if_neededfalse-fill0-padding_modeconstant)
-    - [torchvision.transforms.RandomRotation(<em>degrees</em>, <em>resample=False</em>, <em>expand=False</em>, <em>center=None</em>, <em>fill=0</em>)](#torchvisiontransformsrandomrotationdegrees-resamplefalse-expandfalse-centernone-fill0)
-    - [torchvision.transforms.RandomHorizontalFlip(<em>p=0.5</em>)](#torchvisiontransformsrandomhorizontalflipp05)
-    - [torchvision.transforms.ToTensor](#torchvisiontransformstotensor)
-  - [Compose Transforms](#compose-transforms)
-- [Use Dataloader to Iterate Through Dataset](#use-dataloader-to-iterate-through-dataset)
-- [License](#License)
+- [LADI In PyTorch Framework](#ladi-in-pytorch-framework)
+  - [Introduction](#introduction)
+  - [Prerequisite](#prerequisite)
+  - [Write Custom `Dataset` From LADI](#write-custom-dataset-from-ladi)
+  - [Image `Tranforms`](#image-tranforms)
+    - [Some Basic Transforms](#some-basic-transforms)
+      - [`torchvision.transforms.Resize`(*size*, *interpolation=2*)](#torchvisiontransformsresizesize-interpolation2)
+      - [`torchvision.transforms.RandomCrop`(*size*, *padding=None*, *pad_if_needed=False*, *fill=0*, *padding_mode='constant'*)](#torchvisiontransformsrandomcropsize-paddingnone-padifneededfalse-fill0-paddingmodeconstant)
+      - [`torchvision.transforms.RandomRotation`(*degrees*, *resample=False*, *expand=False*, *center=None*, *fill=0*)](#torchvisiontransformsrandomrotationdegrees-resamplefalse-expandfalse-centernone-fill0)
+      - [`torchvision.transforms.RandomHorizontalFlip`(*p=0.5*)](#torchvisiontransformsrandomhorizontalflipp05)
+      - [`torchvision.transforms.ToTensor`](#torchvisiontransformstotensor)
+    - [Compose Transforms](#compose-transforms)
+  - [Use `Dataloader` to Iterate Through Dataset](#use-dataloader-to-iterate-through-dataset)
+  - [Distribution Statement](#distribution-statement)
 
 *Note: This tutorial/documentation is adapted from [PyTorch Data Loading Tutorial](https://pytorch.org/tutorials/beginner/data_loading_tutorial.html) to fit in LADI Dataset.  See [License](#License) section for information about license.*
 
@@ -23,14 +23,9 @@
 PyTorch is a Python-based scientific computing package targeted at two sets of audiences:
 
 - A replacement for NumPy to use the power of GPUs
-
 - a deep learning research platform that provides maximum flexibility and speed
 
-  
-
 In this documentation, users will try to utilize PyTorch to show, preprocess and manipulate images in LADI as well as train a simple deep learning model based on a small set of data in LADI.
-
-
 
 ## Prerequisite
 
@@ -44,7 +39,7 @@ To get started, users are required to check the following packages are installed
     pip install scikit-image
     ```
 
-  - Install in Anaconda or Miniconda environment 
+  - Install in Anaconda or Miniconda environment
 
     ```shell
     conda install -c conda-forge scikit-image
@@ -88,17 +83,12 @@ To get started, users are required to check the following packages are installed
 
 *Note: If you are a Mac user and trying to install the packages via shell/command prompt, please replace `pip` with `pip3` in the commands above to ensure Python3 compatibility .*
 
-
-
 ## Write Custom `Dataset` From LADI
 
 `torch.utils.data.Dataset` is an abstract class representing a dataset. Your custom dataset should inherit `Dataset` and override the following methods:
 
 - `__len__` so that `len(dataset)` returns the size of the dataset.
-
 - `__getitem__` to support the indexing such that `dataset[i]` can be used to get iith sample
-
-  
 
 To get started, users will need to import the packages. Users can specify the root directory that stores the images and the path of the CSV file that includes metadata of the images in root directory.
 
@@ -231,7 +221,7 @@ for i in range(len(flood_tiny_dataset)):
 
 The first 4 samples will shown below.
 
-![img](https://github.com/NaeRong/DS440_Capstone/blob/master/Images/custom_flood_tiny_dataset_output.png)
+![img](./Images/custom_flood_tiny_dataset_output.png)
 
 Output:
 
@@ -242,23 +232,15 @@ Output:
 3 False ~/ladi/Images/flood_tiny/A0027-94_355188f9-e39b-4a73-8208-17a1c2334215.jpg 4647d8ee717821ab77a74c979dda68a06a1cc9ca 2017-09-26 12:38:47 18.2105516666667 -65.7494166666667 288.0
 ```
 
-
-
 ## Image `Tranforms`
 
 Sometimes, neural networks expect the images of the same size. However, in most datasets, image size is not fixed. This issue requires users to modify the original images to a different size. Some useful `transform` methods are shown below:
 
 - `Resize`: to resize the input PIL Image to the given size.
-
 - `RandomCrop`: to crop from image randomly. This is data augmentation.
-
 - `RandomRotation`: to rotate the image by angle.
-
 - `RandomHorizontalFlip`: to horizontally flip the given PIL Image randomly with a given probability.
-
 - `ToTensor`: to convert the numpy images to torch images (we need to swap axes).
-
-  
 
 ### Some Basic Transforms
 
@@ -268,8 +250,6 @@ Sometimes, neural networks expect the images of the same size. However, in most 
 
 - **size** (*sequence* *or* *python:int*) – Desired output size. If size is a sequence like (h, w), output size will be matched to this. If size is an int, smaller edge of the image will be matched to this number. i.e, if height > width, then image will be rescaled to (size * height / width, size)
 - **interpolation** (*python:int**,* *optional*) – Desired interpolation. Default is `PIL.Image.BILINEAR`
-
-
 
 #### `torchvision.transforms.RandomCrop`(*size*, *padding=None*, *pad_if_needed=False*, *fill=0*, *padding_mode='constant'*)
 
@@ -287,8 +267,6 @@ Sometimes, neural networks expect the images of the same size. However, in most 
 
   Type of padding. Should be: constant, edge, reflect or symmetric. Default is constant.
 
-
-
 #### `torchvision.transforms.RandomRotation`(*degrees*, *resample=False*, *expand=False*, *center=None*, *fill=0*)
 
 **Parameters**
@@ -299,15 +277,11 @@ Sometimes, neural networks expect the images of the same size. However, in most 
 - **center** (*2-tuple**,* *optional*) – Optional center of rotation. Origin is the upper left corner. Default is the center of the image.
 - **fill** (*3-tuple* *or* *python:int*) – RGB pixel fill value for area outside the rotated image. If int, it is used for all channels respectively.
 
-
-
 #### `torchvision.transforms.RandomHorizontalFlip`(*p=0.5*)
 
 **Parameters**
 
 **p** (*python:float*) – probability of the image being flipped. Default value is 0.5
-
-
 
 #### `torchvision.transforms.ToTensor`
 
@@ -316,8 +290,6 @@ Convert a `PIL Image` or `numpy.ndarray` to tensor.
 Converts a PIL Image or numpy.ndarray (H x W x C) in the range [0, 255] to a torch.FloatTensor of shape (C x H x W) in the range [0.0, 1.0] if the PIL Image belongs to one of the modes (L, LA, P, I, F, RGB, YCbCr, RGBA, CMYK, 1) or if the numpy.ndarray has dtype = np.uint8
 
 In the other cases, tensors are returned without scaling.
-
-
 
 ### Compose Transforms
 
@@ -351,11 +323,9 @@ plt.show()
 
 The three transforms of the sample are shown below.
 
-![img](https://github.com/NaeRong/DS440_Capstone/blob/master/Images/pytorch_transform_flood_tiny.png)
+![img](./Images/pytorch_transform_flood_tiny.png)
 
-
-
-## Use `Dataloader` to Iterate Through Dataset 
+## Use `Dataloader` to Iterate Through Dataset
 
 Compared to simple `for` loop to iterate over data, `torch.utils.data.DataLoader` is an iterator which provides more features:
 
@@ -385,7 +355,7 @@ dataloader = DataLoader(transformed_dataset, batch_size=4,
 
 To show batched images, users can write a helper function as shown below.
 
-```python 
+```python
 # Helper function to show a batch
 def show_images_batch(sample_batched):
     images_batch = sample_batched['image']
@@ -418,7 +388,7 @@ for i_batch, sample_batched in enumerate(dataloader):
 
 The transformed images in the 4th batch:
 
-![img](https://github.com/NaeRong/DS440_Capstone/blob/master/Images/dataloader_batch_result.png)
+![img](./Images/dataloader_batch_result.png)
 
 The index and size of images in batch:
 
@@ -429,36 +399,6 @@ The index and size of images in batch:
 3 torch.Size([4, 3, 1792, 1792])
 ```
 
+## Distribution Statement
 
-## License
-
-[BSD 3-Clause License](https://github.com/pytorch/tutorials/blob/master/LICENSE)
-
-Copyright (c) 2017, Pytorch contributors
-All rights reserved.
-
-Redistribution and use in source and binary forms, with or without
-modification, are permitted provided that the following conditions are met:
-
-* Redistributions of source code must retain the above copyright notice, this
-  list of conditions and the following disclaimer.
-
-* Redistributions in binary form must reproduce the above copyright notice,
-  this list of conditions and the following disclaimer in the documentation
-  and/or other materials provided with the distribution.
-
-* Neither the name of the copyright holder nor the names of its
-  contributors may be used to endorse or promote products derived from
-  this software without specific prior written permission.
-
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
-FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-
+[BSD -Clause License](https://github.com/LADI-Dataset/ladi-tutorial/blob/master/LICENSE)
