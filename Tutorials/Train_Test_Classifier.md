@@ -2,21 +2,19 @@
 
 In this tutorial, we will train and test a binary classifier that is able to classify when an image contains flood / water or not.
 
-*Note: This tutorial/documentation is adapted from [TRAINING A CLASSIFIER Tutorial](https://pytorch.org/tutorials/beginner/blitz/cifar10_tutorial.html#sphx-glr-beginner-blitz-cifar10-tutorial-py) to fit in LADI Dataset.  See [License](#License) section for information about license.*
+*Note: This tutorial/documentation is adapted from [TRAINING A CLASSIFIER Tutorial](https://pytorch.org/tutorials/beginner/blitz/cifar10_tutorial.html#sphx-glr-beginner-blitz-cifar10-tutorial-py).*
 
-**Table of Contents**
-
-   * [Get Started](#get-started)
-      * [Custom Dataset](#custom-dataset)
-      * [Transformed Dataset](#transformed-dataset)
-   * [Train and Test Sets Split](#train-and-test-sets-split)
-   * [Train a Convolution Neural Network](#train-a-convolution-neural-network)
-      * [Define a Convolutional Neural Network](#define-a-convolutional-neural-network)
-      * [Define a Loss Function and Optimizer](#define-a-loss-function-and-optimizer)
-      * [Train the Network](#train-the-network)
-   * [Test the Network on Testing Samples](#test-the-network-on-testing-samples)
-   * [License](#license)
-
+- [Train and Test A Classifier](#train-and-test-a-classifier)
+  - [Get Started](#get-started)
+    - [Custom Dataset](#custom-dataset)
+    - [Transformed Dataset](#transformed-dataset)
+  - [Train and Test Sets Split](#train-and-test-sets-split)
+  - [Train a Convolution Neural Network](#train-a-convolution-neural-network)
+    - [Define a Convolutional Neural Network](#define-a-convolutional-neural-network)
+    - [Define a Loss Function and Optimizer](#define-a-loss-function-and-optimizer)
+    - [Train the Network](#train-the-network)
+  - [Test the Network on Testing Samples](#test-the-network-on-testing-samples)
+  - [Distribution Statement](#distribution-statement)
 
 ## Get Started
 
@@ -90,8 +88,6 @@ transforms.ToTensor()]))
 
 We perform `Resize`, `RandomRotation`, `RandomCrop`, and `RandomHorizontalFlip` transforms on our samples. We also use `ToTensor` function to make the samples compatible with the CNN model that we are going to develop. 
 
-
-
 ## Train and Test Sets Split
 
 In stead of load all images and data in one `Dataloader`, to train an model with flexibility and high accuracy, we need to split train and test sets first. We will use `SubsetRandomSampler` package in `PyTorch`.
@@ -138,7 +134,6 @@ Let's define a neural network that takes 3-channel images.
 import torch.nn as nn
 import torch.nn.functional as F
 
-
 class Net(nn.Module):
     def __init__(self):
         super(Net, self).__init__()
@@ -174,7 +169,6 @@ import torch.optim as optim
 criterion = nn.CrossEntropyLoss()
 optimizer = optim.SGD(net.parameters(), lr=0.001, momentum=0.9)
 ```
-
 
 ### Train the Network
 
@@ -235,7 +229,6 @@ PATH = './flood_tiny.pth'
 torch.save(net.state_dict(), PATH)
 ```
 
-
 ## Test the Network on Testing Samples
 
 We have trained the network for 2 passes over the training dataset. Now, we want to check the performance of the trained network.
@@ -262,7 +255,7 @@ imshow(torchvision.utils.make_grid(images))
 print('GroundTruth: ', ' '.join('%5s' % labels[j] for j in range(16)))
 ```
 
-![img](https://github.com/NaeRong/DS440_Capstone/blob/master/Images/testimages.png)
+![testimages.png](../Images/testimages.png)
 
 Out:
 
@@ -342,35 +335,6 @@ Accuracy of     0 : 72 %
 Accuracy of     1 : 56 %
 ```
 
-## License
+## Distribution Statement
 
-[BSD 3-Clause License](https://github.com/pytorch/tutorials/blob/master/LICENSE)
-
-Copyright (c) 2017, Pytorch contributors
-All rights reserved.
-
-Redistribution and use in source and binary forms, with or without
-modification, are permitted provided that the following conditions are met:
-
-* Redistributions of source code must retain the above copyright notice, this
-  list of conditions and the following disclaimer.
-
-* Redistributions in binary form must reproduce the above copyright notice,
-  this list of conditions and the following disclaimer in the documentation
-  and/or other materials provided with the distribution.
-
-* Neither the name of the copyright holder nor the names of its
-  contributors may be used to endorse or promote products derived from
-  this software without specific prior written permission.
-
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
-FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-
+[BSD -Clause License](https://github.com/LADI-Dataset/ladi-tutorial/blob/master/LICENSE)
