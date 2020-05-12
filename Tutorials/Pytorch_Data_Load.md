@@ -323,7 +323,7 @@ plt.show()
 
 The three transforms of the sample are shown below.
 
-![img](./Images/pytorch_transform_flood_tiny.png)
+![img](../Images/pytorch_transform_flood_tiny.png)
 
 ## Use `Dataloader` to Iterate Through Dataset
 
