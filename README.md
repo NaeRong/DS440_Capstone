@@ -8,7 +8,6 @@ Tutorial for the Low Altitude Disaster Imagery (LADI) dataset. This tutorial was
   - [PyTorch Data Loading](#pytorch-data-loading)
   - [Train and Test A Classifier](#train-and-test-a-classifier)
   - [Fine Tuning Torchvision Models](#fine-tuning-torchvision-models)
-  - [SageMaker Build Train and Deploy ML Models](#sagemaker-build-train-and-deploy-ml-models)
   - [Distribution Statement](#distribution-statement)
 
 ## Getting Started
@@ -40,12 +39,6 @@ This documentation is about training and testing a classifier model using Convol
 [Fine Tuning Torchvision Models](./Tutorials/Fine_Tune_Torchvision_Models.md)
 
 This documentation is about training and testing a classifier model using pre-trained ResNet and AlexNet.
-
-## SageMaker Build Train and Deploy ML Models
-
-[SageMaker Build Train and Deploy ML Models](./Tutorials/SageMaker_Intro.md)
-
-This documentation is about migrating model scripts into the AWS SageMaker environment.
 
 ## Distribution Statement
 
