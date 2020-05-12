@@ -221,7 +221,7 @@ for i in range(len(flood_tiny_dataset)):
 
 The first 4 samples will shown below.
 
-![img](./Images/custom_flood_tiny_dataset_output.png)
+![img](../Images/custom_flood_tiny_dataset_output.png)
 
 Output:
 
@@ -388,7 +388,7 @@ for i_batch, sample_batched in enumerate(dataloader):
 
 The transformed images in the 4th batch:
 
-![img](./Images/dataloader_batch_result.png)
+![img](../Images/dataloader_batch_result.png)
 
 The index and size of images in batch:
 

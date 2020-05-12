@@ -22,7 +22,8 @@
 Pytorch provides `cnn_finetune`, which includes multiple deep learning models, pre-trained on the ImageNet dataset. The package automatically replaces classifier on top of the network, which allows the user to train a network with a dataset that has a different number of classes. 
 Also, `cnn_finetune` allows users to add a dropout layer or a custom pooling layer.
 
-In this project, we are focusing on ResNet and AlexNet
+In this project, we are focusing on ResNet and AlexNet:
+
 - ResNet (resnet18, resnet34, resnet50, resnet101, resnet152)
 - AlexNet (alexnet)
 - DenseNet (densenet161)
@@ -94,7 +95,9 @@ parser.add_argument('--no-cuda', action='store_true', default=False,
 parser.add_argument('--model-name', type=str, default='resnet34', metavar='M',
                     help='model name (default: resnet34)')
 ```
+
 Users can use "to.device" to switch the training from using cpu to gpu.
+
 ```python
 args = parser.parse_args()
 use_cuda = not args.no_cuda and torch.cuda.is_available()
@@ -170,6 +173,7 @@ def test(model, test_loader, criterion=nn.CrossEntropyLoss()):
 ```
 
 ## Run Training and Testing Step
+
 Finally, the last step is to setup the loss for the model, then run the training and testing function for the set number of epochs.
 In this step, we also create an optimizer that only updates the desired parameters. To construct an Optimizer you have to give it an iterable containing the parameters (all should be Variable s) to optimize. Then, you can specify optimizer-specific options such as the learning rate, weight decay, etc.
 The common optimizer includes:
@@ -207,9 +211,10 @@ In PyTorch, the user can save the trained model into a .pt or .pth file extensio
 In this step, we used the existing model to predict the new dataset.
 
 Parameter Tuning Example: (define new parameter using "parser.add_argument" function)
-* Change the number of epochs from 30 to 50 
-* Change the batch size from 4 to 16
-* Change the learing rate from 0.1 to 0.01
+
+- Change the number of epochs from 30 to 50
+- Change the batch size from 4 to 16
+- Change the learing rate from 0.1 to 0.01
 
 ### ResNet / DenseNet / MobileNet
 
@@ -305,7 +310,7 @@ print('Predicted: ', ' '.join('%5s' % predicted[j]
                               for j in range(8)))
 ```
 
-![pred.png](./Images/pred.png)
+![pred.png](../Images/pred.png)
 
 ## Model Accuracy
 
@@ -334,7 +339,7 @@ In terms of future improvement, we are looking into fine-tuning the MobilNetV2 a
 
 The true positives rate and true negatives rate are both about 80%, which indicates a good precision / recall of our model.
 
-![confusionmatrix](./Images/cm.png)
+![confusionmatrix](../Images/cm.png)
 
 ### Python Script for Confusion Matrix
 

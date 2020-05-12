@@ -4,7 +4,6 @@ Tutorial for the Low Altitude Disaster Imagery (LADI) dataset. This tutorial was
 
 - [Tutorials Guide](#tutorials-guide)
   - [Getting Started](#getting-started)
-  - [Getting Dataset](#getting-dataset)
   - [Clean and Validate LADI Dataset](#clean-and-validate-ladi-dataset)
   - [PyTorch Data Loading](#pytorch-data-loading)
   - [Train and Test A Classifier](#train-and-test-a-classifier)
@@ -14,43 +13,37 @@ Tutorial for the Low Altitude Disaster Imagery (LADI) dataset. This tutorial was
 
 ## Getting Started
 
-[Getting Started](https://github.com/NaeRong/DS440_Capstone/blob/master/Tutorials/Getting%20Started.md)
+[Getting Started](./Tutorials/Get_Started.md)
 
 This documentation is about installing AWS tools and configuring AWS environment to download LADI dataset and load dataset in Python locally and remotely.
 
-## Getting Dataset
-
-[Getting Dataset](https://github.com/NaeRong/DS440_Capstone/blob/master/Data)
-
-This folder contains dataset with 2000 images and labels.
-
 ## Clean and Validate LADI Dataset
 
-[Clean and Validate LADI Dataset](https://github.com/NaeRong/DS440_Capstone/blob/master/Tutorials/Clean%20and%20Validate%20LADI%20Dataset.md)
+[Clean and Validate LADI Dataset](./Tutorials/Clean_Validate.md)
 
 This documentation is about clean the LADI dataset. For this project, we have only extracted 2000 images for training.
 
 ## PyTorch Data Loading
 
-[PyTorch Data Loading](https://github.com/NaeRong/DS440_Capstone/blob/master/Tutorials/Pytorch%20Data%20Load.md)
+[PyTorch Data Loading](./Tutorials/Pytorch_Data_Load.md)
 
 This documentation is about loading LADI dataset in PyTorch framework including examples of writing custom `Dataset`, `Transforms` and `Dataloader`.
 
 ## Train and Test A Classifier
 
-[Train and Test A Classifier](https://github.com/NaeRong/DS440_Capstone/blob/master/Tutorials/Train%20and%20Test%20A%20Classifier.md)
+[Train and Test A Classifier](./Tutorials/Train_Test_Classifier.md)
 
 This documentation is about training and testing a classifier model using Convolutional Neural Network (CNN) from scratch.
 
 ## Fine Tuning Torchvision Models
 
-[Fine Tuning Torchvision Models](Tutorials/Fine%20Tuning%20Torchvision%20Models.md)
+[Fine Tuning Torchvision Models](./Tutorials/Fine_Tune_Torchvision_Models.md)
 
 This documentation is about training and testing a classifier model using pre-trained ResNet and AlexNet.
 
 ## SageMaker Build Train and Deploy ML Models
 
-[SageMaker Build Train and Deploy ML Models](Tutorials/SageMaker%20-%20Build,%20Train,%20and%20Deploy%20ML%20Model.md)
+[SageMaker Build Train and Deploy ML Models](./Tutorials/SageMaker_Intro.md)
 
 This documentation is about migrating model scripts into the AWS SageMaker environment.
 

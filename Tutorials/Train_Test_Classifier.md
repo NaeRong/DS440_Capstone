@@ -255,7 +255,7 @@ imshow(torchvision.utils.make_grid(images))
 print('GroundTruth: ', ' '.join('%5s' % labels[j] for j in range(16)))
 ```
 
-![img](https://github.com/NaeRong/DS440_Capstone/blob/master/Images/testimages.png)
+![testimages.png](../Images/testimages.png)
 
 Out:
 

@@ -162,7 +162,7 @@ image_path = 'Images/FEMA_CAP/1012/20118/VIRB0002_fa5065eb-773a-4b41-8f2c-80a734
 im = Image.open(image_path)
 plt.imshow(im, cmap='Greys_r')
 ```
-![img](https://github.com/NaeRong/DS440_Capstone/blob/master/Images/010_0775_4365f589-de67-4561-8fdd-f1ac1ac1ae07.jpg)
+![img](../Images/010_0775_4365f589-de67-4561-8fdd-f1ac1ac1ae07.jpg)
 
 ## Distribution Statement
 
