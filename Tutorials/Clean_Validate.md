@@ -18,7 +18,7 @@ Human generated labels cover 20% of the total images in the dataset.
    ```python
    import pandas as pd
    import numpy as np
-   human_label = "/content/drive/My Drive/Colab Notebooks/DS440_data/ladi_aggregated_responses.tsv"
+   human_label = "/content/drive/My Drive/Colab Notebooks/DS440_data/ladi_aggregated_responses_url.tsv"
    file = pd.read_csv(human_label,delimiter='\t',header='infer')
    ```
 
@@ -32,9 +32,9 @@ Human generated labels cover 20% of the total images in the dataset.
 
 - Fields: 
 
-  - *img_url* 
+  - *url* 
   - *WorkerId*
-  - *Answer :* Dataset contains 495 categories
+  - *Answer* Dataset contains 495 categories
 
 - Answer outputs are similar to the following: 
 
@@ -64,12 +64,12 @@ For this project, we will only consider 'damage' and 'infrastructure' labels.
    ```
 6. Extract url data with the label does contain 'flood'
    ```python
-   im_flood_lst = label_flood['img_url'].unique().tolist()
+   im_flood_lst = label_flood['url'].unique().tolist()
    ```
 7. Extract url data with the label does not contain 'flood'
    ```python
    label_notflood = label_damage_infra[~label_damage_infra['img_url'].isin(im_flood_lst)]
-   im_not_flood_lst = label_notflood['img_url'].unique().tolist()
+   im_not_flood_lst = label_notflood['url'].unique().tolist()
    ``` 
 8*. (Optional) Write list into csv file
 
