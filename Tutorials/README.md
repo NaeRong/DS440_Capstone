@@ -15,49 +15,49 @@ Tutorial for the Low Altitude Disaster Imagery (LADI) dataset. This tutorial was
 
 ## Getting Started
 
-[Getting Started](./Tutorials/Get_Started.md)
+[Getting Started](Get_Started.md)
 
 This documentation is about installing AWS tools and configuring AWS environment to download LADI dataset and load dataset in Python locally and remotely.
 
 ## Clean and Validate LADI Dataset
 
-[Clean and Validate LADI Dataset](./Tutorials/Clean_Validate.md)
+[Clean and Validate LADI Dataset](Clean_Validate.md)
 
 This documentation is about clean the LADI dataset. For this project, we have only extracted 2000 images for training.
 
 ## iso-3166-2
 
-[iso-3166-2](./Tutorials/Geospatial-Hurricane-Analysis.ipynb)
+[iso-3166-2](iso-3166-2.ipynb)
 
 This documentation performs a geospatial Analysis of the number of images taken within an administrative boundary(states) and assigns each state a color based on the number of images taken.
 
 ## Geospatial Hurricane Analysis
 
-[Geospatial Hurricane Analysis](./Tutorials/Geospatial-Hurricane-Analysis.ipynb)
+[Geospatial Hurricane Analysis](Geospatial-Hurricane-Analysis.ipynb)
 
 This documentation performs a geospatial Analysis of the destruction and flooding caused by Hurricanes Florence and Matthew in Florida, Georgia, and the Carolinas.
 
 ## PyTorch Data Loading
 
-[PyTorch Data Loading](./Tutorials/Pytorch_Data_Load.md)
+[PyTorch Data Loading](Pytorch_Data_Load.md)
 
 This documentation is about loading LADI dataset in PyTorch framework including examples of writing custom `Dataset`, `Transforms` and `Dataloader`.
 
 ## Train and Test A Classifier
 
-[Train and Test A Classifier](./Tutorials/Train_Test_Classifier.md)
+[Train and Test A Classifier](Train_Test_Classifier.md)
 
 This documentation is about training and testing a classifier model using Convolutional Neural Network (CNN) from scratch.
 
 ## Fine Tuning Torchvision Models
 
-[Fine Tuning Torchvision Models](./Tutorials/Fine_Tune_Torchvision_Models.md)
+[Fine Tuning Torchvision Models](Fine_Tune_Torchvision_Models.md)
 
 This documentation is about training and testing a classifier model using pre-trained ResNet and AlexNet.
 
 ## Scripts
 
-[Scripts](./scripts)
+[Scripts](../scripts/README.md)
 
 This is a set of boilerplate scripts describing the normalized script pattern that GitHub uses in its projects. The GitHub Scripts To Rule Them All was used as a template. These scripts will download all of the necessary data to get you started.
 
