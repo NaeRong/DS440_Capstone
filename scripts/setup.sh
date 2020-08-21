@@ -14,6 +14,16 @@ wget $URL_AIRPORTS -O $FLOOD_ANALYSIS_CORE/data/FAA-Airports/faa_airports.zip
 # unzip all files
 unzip -j -o $FLOOD_ANALYSIS_CORE/data/FAA-Airports/faa_airports.zip -d $FLOOD_ANALYSIS_CORE/data/FAA-Airports/
 
+###### DOWNLOAD NATURAL EARTH MAPS
+# https://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-admin-1-states-provinces/
+URL_NATURAL_EARTH='https://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/cultural/ne_10m_admin_1_states_provinces.zip'
+
+# Download file
+wget $URL_NATURAL_EARTH -O $FLOOD_ANALYSIS_CORE/data/Natural-Earth/ne_10m_admin_1_states_provinces.zip
+
+# unzip all files
+unzip -j -o $FLOOD_ANALYSIS_CORE/data/Natural-Earth/ne_10m_admin_1_states_provinces.zip -d $FLOOD_ANALYSIS_CORE/data/Natural-Earth/
+
 ###### DOWNLOAD US STATES
 # https://catalog.data.gov/dataset/tiger-line-shapefile-2017-nation-u-s-current-state-and-equivalent-national
 URL_STATES='https://www2.census.gov/geo/tiger/TIGER2017/STATE/tl_2017_us_state.zip'

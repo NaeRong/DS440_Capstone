@@ -11,4 +11,4 @@ apt install unzip
 
 ## Check for $FLOOD_ANALYSIS_CORE
 # https://stackoverflow.com/q/3601515
-if [ -z "${FLOOD_ANALYSIS_CORE:-}" ]; then echo "FLOOD_ANALYSIS_CORE is set to '$FLOOD_ANALYSIS_CORE'"; else echo "FLOOD_ANALYSIS_CORE is unset"; fi
+if [ -z "${FLOOD_ANALYSIS_CORE:-}" ]; then echo "FLOOD_ANALYSIS_CORE is unset"; else echo "FLOOD_ANALYSIS_CORE is set to '$FLOOD_ANALYSIS_CORE'"; fi
