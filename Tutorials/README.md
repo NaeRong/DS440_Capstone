@@ -1,6 +1,6 @@
 # Tutorials Guide
 
-Tutorial for the Low Altitude Disaster Imagery (LADI) dataset. This tutorial was originally forked from a [Penn State Learning Factory](https://www.lf.psu.edu/) capstone project
+Tutorial for the Low Altitude Disaster Imagery (LADI) dataset. This tutorial was originally forked from a [Penn State Learning Factory](https://www.lf.psu.edu/) capstone project and then further iterated upon by MIT.
 
 - [Tutorials Guide](#tutorials-guide)
   - [Getting Started](#getting-started)
@@ -17,7 +17,7 @@ Tutorial for the Low Altitude Disaster Imagery (LADI) dataset. This tutorial was
 
 [Getting Started](Get_Started.md)
 
-This documentation is about installing AWS tools and configuring AWS environment to download LADI dataset and load dataset in Python locally and remotely.
+This documentation is about installing configuring an environment to download LADI dataset and load dataset in Python locally and remotely.
 
 ## Clean and Validate LADI Dataset
 
