@@ -17,19 +17,19 @@ Tutorial for the Low Altitude Disaster Imagery (LADI) dataset. This tutorial was
 
 [Getting Started](Get_Started.md)
 
-This documentation is about installing configuring an environment to download LADI dataset and load dataset in Python locally and remotely.
+This documentation is about installing and configuring an environment to download the LADI dataset and load it in Python locally and remotely.
 
 ## Clean and Validate LADI Dataset
 
 [Clean and Validate LADI Dataset](Clean_Validate.md)
 
-This documentation is about clean the LADI dataset. For this project, we have only extracted 2000 images for training.
+This documentation is about cleaning the LADI dataset. For this project, we have only extracted 2000 images for training.
 
 ## iso-3166-2
 
 [iso-3166-2](iso-3166-2.ipynb)
 
-This documentation performs a geospatial Analysis of the number of images taken within an administrative boundary(states) and assigns each state a color based on the number of images taken.
+This documentation performs a geospatial Analysis of the number of images taken within an administrative boundary (states) and assigns each state a color based on the number of images taken.
 
 ## Geospatial Hurricane Analysis
 
