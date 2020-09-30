@@ -8,7 +8,7 @@
   - [Image `Tranforms`](#image-tranforms)
     - [Some Basic Transforms](#some-basic-transforms)
       - [`torchvision.transforms.Resize`(*size*, *interpolation=2*)](#torchvisiontransformsresizesize-interpolation2)
-      - [`torchvision.transforms.RandomCrop`(*size*, *padding=None*, *pad_if_needed=False*, *fill=0*, *padding_mode='constant'*)](#torchvisiontransformsrandomcropsize-paddingnone-padifneededfalse-fill0-paddingmodeconstant)
+      - [`torchvision.transforms.RandomCrop`(*size*, *padding=None*, *pad_if_needed=False*, *fill=0*, *padding_mode='constant'*)](#torchvisiontransformsrandomcropsize-paddingnone-pad_if_neededfalse-fill0-padding_modeconstant)
       - [`torchvision.transforms.RandomRotation`(*degrees*, *resample=False*, *expand=False*, *center=None*, *fill=0*)](#torchvisiontransformsrandomrotationdegrees-resamplefalse-expandfalse-centernone-fill0)
       - [`torchvision.transforms.RandomHorizontalFlip`(*p=0.5*)](#torchvisiontransformsrandomhorizontalflipp05)
       - [`torchvision.transforms.ToTensor`](#torchvisiontransformstotensor)
@@ -16,7 +16,7 @@
   - [Use `Dataloader` to Iterate Through Dataset](#use-dataloader-to-iterate-through-dataset)
   - [Distribution Statement](#distribution-statement)
 
-*Note: This tutorial/documentation is adapted from [PyTorch Data Loading Tutorial](https://pytorch.org/tutorials/beginner/data_loading_tutorial.html) to fit in LADI Dataset.  See [License](#License) section for information about license.*
+*Note: This tutorial/documentation is adapted from [PyTorch Data Loading Tutorial](https://pytorch.org/tutorials/beginner/data_loading_tutorial.html) to fit in LADI Dataset.*
 
 ## Introduction
 
@@ -221,7 +221,7 @@ for i in range(len(flood_tiny_dataset)):
 
 The first 4 samples will shown below.
 
-![img](../Images/custom_flood_tiny_dataset_output.png)
+![img](../images/custom_flood_tiny_dataset_output.png)
 
 Output:
 
@@ -323,7 +323,7 @@ plt.show()
 
 The three transforms of the sample are shown below.
 
-![img](../Images/pytorch_transform_flood_tiny.png)
+![img](../images/pytorch_transform_flood_tiny.png)
 
 ## Use `Dataloader` to Iterate Through Dataset
 
@@ -388,7 +388,7 @@ for i_batch, sample_batched in enumerate(dataloader):
 
 The transformed images in the 4th batch:
 
-![img](../Images/dataloader_batch_result.png)
+![img](../images/dataloader_batch_result.png)
 
 The index and size of images in batch:
 
@@ -401,4 +401,4 @@ The index and size of images in batch:
 
 ## Distribution Statement
 
-[BSD -Clause License](https://github.com/LADI-Dataset/ladi-tutorial/blob/master/LICENSE)
+[BSD 3-Clause License](../LICENSE)

@@ -310,7 +310,7 @@ print('Predicted: ', ' '.join('%5s' % predicted[j]
                               for j in range(8)))
 ```
 
-![pred.png](../Images/pred.png)
+![pred.png](../images/pred.png)
 
 ## Model Accuracy
 
@@ -329,23 +329,23 @@ In terms of future improvement, we are looking into fine-tuning the MobilNetV2 a
 
 ### Python Scripts
 
-- [AlexNet model](https://github.com/NaeRong/DS440_Capstone/blob/master/Tutorials/Model%20Script/alexnet.py)
-- [ResNet 34 model](https://github.com/NaeRong/DS440_Capstone/blob/master/Tutorials/Model%20Script/resnset34.py)
-- [ResNet 101 model](https://github.com/NaeRong/DS440_Capstone/blob/master/Tutorials/Model%20Script/resnset101.py)
-- [DenseNet 161 model](https://github.com/NaeRong/DS440_Capstone/blob/master/Tutorials/Model%20Script/densenet.py)
-- [Mobilenet V2 model](https://github.com/NaeRong/DS440_Capstone/blob/master/Tutorials/Model%20Script/mobilenetv2.py)
+- [AlexNet model](code/alexnet.py)
+- [ResNet 34 model](code/resnset34.py)
+- [ResNet 101 model](code/resnset101.py)
+- [DenseNet 161 model](code/densenet.py)
+- [Mobilenet V2 model](code/mobilenetv2.py)
 
 ## Confusion Matrix for ResNet 101
 
 The true positives rate and true negatives rate are both about 80%, which indicates a good precision / recall of our model.
 
-![confusionmatrix](../Images/cm.png)
+![confusionmatrix](../images/cm.png)
 
 ### Python Script for Confusion Matrix
 
-- [Confusion Matrix](https://github.com/NaeRong/DS440_Capstone/blob/master/Tutorials/Model%20Script/Confusion_Matrix.py)
-- [Confusion Matrix Plot](https://github.com/NaeRong/DS440_Capstone/blob/master/Tutorials/Model%20Script/Plot_Confusion_Matrix.py)
+- [Confusion Matrix](code/Confusion_Matrix.py)
+- [Confusion Matrix Plot](code/Plot_Confusion_Matrix.py)
 
 ## Distribution Statement
 
-[BSD -Clause License](https://github.com/LADI-Dataset/ladi-tutorial/blob/master/LICENSE)
+[BSD 3-Clause License](../LICENSE)

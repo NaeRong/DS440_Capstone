@@ -6,7 +6,11 @@
     - [Download LADI to Local Machine with AWS Command Line Interface](#download-ladi-to-local-machine-with-aws-command-line-interface)
     - [Transfer LADI to Your Own S3 Bucket](#transfer-ladi-to-your-own-s3-bucket)
   - [Access and Download LADI Data via Web Browser](#access-and-download-ladi-data-via-web-browser)
-- [Load LADI in Python3](#load-ladi-in-python3)
+  - [Load LADI in Python3](#load-ladi-in-python3)
+    - [Boto 3](#boto-3)
+    - [Pandas](#pandas)
+    - [Numpy](#numpy)
+    - [PyTorch](#pytorch)
   - [LADI Stored in S3 Bucket](#ladi-stored-in-s3-bucket)
   - [LADI Stored in Local Machine](#ladi-stored-in-local-machine)
   - [Distribution Statement](#distribution-statement)
@@ -59,14 +63,10 @@ After you have created and activated your account, you can choose to download LA
 
 ### Transfer LADI to Your Own S3 Bucket
 
-1.  Please follow Step 1 to Step 4 in the "Download LADI to Local Machine with AWS Command Line Interface" section to install and configure AWS CLI.
-
+1. Please follow Step 1 to Step 4 in the "Download LADI to Local Machine with AWS Command Line Interface" section to install and configure AWS CLI.
 2. Sign in to the AWS Management Console and open the [Amazon S3 console](https://console.aws.amazon.com/s3/).
-
 3. Follow the tutorial on [Creating an S3 Bucket](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html) to create a bucket.
-
 4. Go to the [Amazon S3 console](https://console.aws.amazon.com/s3/) to verify that your new bucket has been created.
-
 5. Run the following command to copy data from the original LADI S3 bucket to your own bucket.
 
    ```shell
@@ -81,11 +81,11 @@ After you have created and activated your account, you can choose to download LA
 
 Without Amazon AWS account and services, users can also access and download files in LADI by going to http://ladi.s3-us-west-2.amazonaws.com/index.html using a web browser. However, due to efficiency of downloading the data, we highly recommend to use AWS CLI.
 
-# Load LADI in Python3
+## Load LADI in Python3
 
 Users can load files and data from LADI in Python 3 by using AWS Python SDK Boto 3 if the dataset is stored in AWS S3 bucket. LADI can also be load using other packages: Pandas, NumPy and PyTorch. Using the following command to install these packages:
 
-- Boto 3
+### Boto 3
 
   ```shell
   $pip install boto3
@@ -93,7 +93,7 @@ Users can load files and data from LADI in Python 3 by using AWS Python SDK Boto
 
   For more information for installing Boto3, please go to [Boto 3 Quickstart](https://boto3.amazonaws.com/v1/documentation/api/latest/guide/quickstart.html).
 
-- Pandas
+### Pandas
 
   ```shell
   $pip install pandas
@@ -101,7 +101,7 @@ Users can load files and data from LADI in Python 3 by using AWS Python SDK Boto
 
   For more information for installing Pandas with Anaconda and Miniconda, please go to [Pandas Installation](https://pandas.pydata.org/pandas-docs/stable/getting_started/install.html).
 
-- Numpy
+### Numpy
 
   ```shell
   $pip install numpy
@@ -109,7 +109,7 @@ Users can load files and data from LADI in Python 3 by using AWS Python SDK Boto
 
   For more installation options, please visit [SciPy Installation](https://scipy.org/install.html).
 
-- PyTorch
+### PyTorch
 
   ```shell
   $pip install torch torchvision
@@ -131,7 +131,7 @@ If you transferred LADI into your own AWS S3 bucket and prefer to not store the 
    ```python
    import pandas as pd
    import boto3
-   
+
    #replace 'bucket name' to your s3 bucket name
    bucket_name = 'bucket_name'
    #replace 'ladi_images_metadata.csv' with the path of the file that you want to read
@@ -163,8 +163,9 @@ image_path = 'Images/FEMA_CAP/1012/20118/VIRB0002_fa5065eb-773a-4b41-8f2c-80a734
 im = Image.open(image_path)
 plt.imshow(im, cmap='Greys_r')
 ```
-![img](../Images/010_0775_4365f589-de67-4561-8fdd-f1ac1ac1ae07.jpg)
+
+![img](../images/010_0775_4365f589-de67-4561-8fdd-f1ac1ac1ae07.jpg)
 
 ## Distribution Statement
 
-[BSD -Clause License](https://github.com/LADI-Dataset/ladi-tutorial/blob/master/LICENSE)
+[BSD 3-Clause License](../LICENSE)

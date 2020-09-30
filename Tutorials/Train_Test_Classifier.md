@@ -18,7 +18,7 @@ In this tutorial, we will train and test a binary classifier that is able to cla
 
 ## Get Started
 
-Before we start to train the model, we need to load data into our custom dataset and do some transforms on our samples. So, first we can reuse our custom dataset `FloodTinyDataset` and `transformed_dataset` in [PyTorch Data Loading](https://github.com/NaeRong/DS440_Capstone/blob/master/Tutorials/Pytorch%20Data%20Load.md) Tutorial.
+Before we start to train the model, we need to load data into our custom dataset and do some transforms on our samples. So, first we can reuse our custom dataset `FloodTinyDataset` and `transformed_dataset` in [PyTorch Data Loading](Pytorch_Data_Load.md) Tutorial.
 
 ### Custom Dataset
 
@@ -328,7 +328,7 @@ for i in range(2):
         i, 100 * class_correct[i] / class_total[i]))
 ```
 
-Out: 
+Out:
 
 ```bash
 Accuracy of     0 : 72 %
@@ -337,4 +337,4 @@ Accuracy of     1 : 56 %
 
 ## Distribution Statement
 
-[BSD -Clause License](https://github.com/LADI-Dataset/ladi-tutorial/blob/master/LICENSE)
+[BSD 3-Clause License](../LICENSE)

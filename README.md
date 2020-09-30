@@ -1,22 +1,21 @@
-# Tutorials Guide
+# LADI Tutorials
 
-Tutorial for the Low Altitude Disaster Imagery (LADI) dataset. This tutorial was originally forked from a [Penn State Learning Factory](https://www.lf.psu.edu/) capstone project.
+Tutorials for the Low Altitude Disaster Imagery (LADI) dataset. This tutorial was originally forked from a [Penn State Learning Factory](https://www.lf.psu.edu/) capstone project.
 
-- [Tutorials Guide](#tutorials-guide)
+- [LADI Tutorials](#ladi-tutorials)
+  - [Point of Contact](#point-of-contact)
   - [Initial Setup](#initial-setup)
     - [Persistent System Environment Variables](#persistent-system-environment-variables)
     - [Scripts](#scripts)
   - [Tutorials - Accessing the Dataset](#tutorials---accessing-the-dataset)
-    - [Getting Started](#getting-started)
-    - [Clean and Validate LADI Dataset](#clean-and-validate-ladi-dataset)
   - [Tutorials - Metadata Analysis](#tutorials---metadata-analysis)
-    - [iso-3166-2](#iso-3166-2)
-    - [Geospatial Hurricane Analysis](#geospatial-hurricane-analysis)
     - [Tutorials - Machine Learning](#tutorials---machine-learning)
     - [PyTorch Data Loading](#pytorch-data-loading)
-    - [Train and Test A Classifier](#train-and-test-a-classifier)
-    - [Fine Tuning Torchvision Models](#fine-tuning-torchvision-models)
   - [Distribution Statement](#distribution-statement)
+
+## Point of Contact
+
+We encourage the use of the [GitHub Issues](https://guides.github.com/features/issues/) but when email is required, please contact the administrators at [ladi-dataset-admin@mit.edu](mailto:ladi-dataset-admin@mit.edu). As the public safety and computer vision communities adopt the dataset, a separate mailing list for development may be created.
 
 ## Initial Setup
 
@@ -24,15 +23,15 @@ This section specifies the run order and requirements for the initial setup the 
 
 ### Persistent System Environment Variables
 
-Immediately after cloning this repository, [create a persistent system environment](https://superuser.com/q/284342/44051) variable titled `FLOOD_ANALYSIS_CORE` with a value of the full path to this repository root directory.
+Immediately after cloning this repository, [create a persistent system environment](https://superuser.com/q/284342/44051) variable titled `LADI_DIR_TUTORIAL` with a value of the full path to this repository root directory.
 
 On unix there are many ways to do this, here is an example using [`/etc/profile.d`](https://unix.stackexchange.com/a/117473). Create a new file `ladi-env.sh` using `sudo vi /etc/profile.d/ladi-env.sh` and add the command to set the variable:
 
 ```bash
-export FLOOD_ANALYSIS_CORE=PATH TO /ladi-tutorial
+export LADI_DIR_TUTORIAL=PATH TO /ladi-tutorial
 ```
 
-You can confirm `FLOOD_ANALYSIS_CORE` was set in unix by inspecting the output of `env`.
+You can confirm `LADI_DIR_TUTORIAL` was set in unix by inspecting the output of `env`.
 
 ### Scripts
 
@@ -42,52 +41,29 @@ You will need to run these scripts in this order to download package dependencie
 
 ## Tutorials - Accessing the Dataset
 
-### Getting Started
+A set of tutorials focused on installing AWS tools and configuring AWS environment to download LADI dataset and load dataset in Python locally and remotely. There is also a short tutorial on how to clean and validate data.
 
-This documentation is about installing AWS tools and configuring AWS environment to download LADI dataset and load dataset in Python locally and remotely.
-
-*Readme:* [Getting Started](./Tutorials/Get_Started.md)
-
-### Clean and Validate LADI Dataset
-
-This documentation is about clean the LADI dataset. For this project, we have only extracted 2000 images for training.
-
-*Readme:* [Clean and Validate LADI Dataset](./Tutorials/Clean_Validate.md)
+- [Getting Started](./tutorials/Get_Started.md)
+- [Clean and Validate LADI Dataset](./tutorials/Clean_Validate.md)
 
 ## Tutorials - Metadata Analysis
 
-### iso-3166-2
+A set of tutorials are Jupyter Python 3.X notebooks that demonstrate on how to perform geospatial analysis by enhancing the LADI metadata with third party GIS information. One tutorial identifies the number of images taken within an administrative boundary (e.g. USA states) and assigns each state a color based on the number of images taken. The other tutorial filters images based on an specific annotation and performs various geospatial measurements on this subset.
 
-This documentation performs a geospatial Analysis of the number of images taken within an administrative boundary(states) and assigns each state a color based on the number of images taken.
-
-*Notebook:* [iso-3166-2](./Tutorials/Geospatial-Hurricane-Analysis.ipynb)
-
-### Geospatial Hurricane Analysis
-
-This documentation performs a geospatial Analysis of the destruction and flooding caused by Hurricanes Florence and Matthew in Florida, Georgia, and the Carolinas.
-
-*Notebook:* [Geospatial Hurricane Analysis](./Tutorials/Geospatial-Hurricane-Analysis.ipynb)
+- [ISO-3166-2 Administrative Boundaries](./tutorials/Geospatial-Hurricane-Analysis.ipynb)
+- [Geospatial Hurricane Analysis](./tutorials/Geospatial-Hurricane-Analysis.ipynb)
 
 ### Tutorials - Machine Learning
 
+These tutorials focus on how to training and testing a classifier model using Convolutional Neural Network (CNN) from scratch or using pre-trained ResNet and AlexNet.
+
 ### PyTorch Data Loading
 
-[PyTorch Data Loading](./Tutorials/Pytorch_Data_Load.md)
-
+- [PyTorch Data Loading](./tutorials/Pytorch_Data_Load.md)
+- [Train and Test A Classifier](./tutorials/Train_Test_Classifier.md)
+- [Fine Tuning Torchvision Models](./tutorials/Fine_Tune_Torchvision_Models.md)
 This documentation is about loading LADI dataset in PyTorch framework including examples of writing custom `Dataset`, `Transforms` and `Dataloader`.
-
-### Train and Test A Classifier
-
-This documentation is about training and testing a classifier model using Convolutional Neural Network (CNN) from scratch.
-
-*Readme:* [Train and Test A Classifier](./Tutorials/Train_Test_Classifier.md)
-
-### Fine Tuning Torchvision Models
-
-This documentation is about training and testing a classifier model using pre-trained ResNet and AlexNet.
-
-*Readme:* [Fine Tuning Torchvision Models](./Tutorials/Fine_Tune_Torchvision_Models.md)
 
 ## Distribution Statement
 
-[BSD -Clause License](https://github.com/LADI-Dataset/ladi-tutorial/blob/master/LICENSE)
+[BSD 3-Clause License](LICENSE)

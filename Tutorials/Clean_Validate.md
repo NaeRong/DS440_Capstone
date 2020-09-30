@@ -22,7 +22,7 @@ Human generated labels cover 20% of the total images in the dataset.
    file = pd.read_csv(human_label,delimiter='\t',header='infer')
    ```
 
-- Data information: 
+- Data information:
 
 - The LADI aggregated responses:
 
@@ -30,43 +30,42 @@ Human generated labels cover 20% of the total images in the dataset.
 
 - Data points: 193663 rows
 
-- Fields: 
+- Fields:
 
   - *url* 
   - *WorkerId*
   - *Answer* Dataset contains 495 categories
 
-- Answer outputs are similar to the following: 
+- Answer outputs are similar to the following:
 
-
-  ![img](https://github.com/NaeRong/DS440_Capstone/blob/master/Images/Label_Human.png)
+![Human Labels](../images/Label_Human.png)
 
 For this project, we will only consider 'damage' and 'infrastructure' labels.
 
-2. Strip off bracket and comma from the Answer catagory
+1. Strip off bracket and comma from the Answer catagory
 
    ```python
    file["Answer"] = file["Answer"].str.strip('[|]')
    file["Answer"] = file["Answer"].str.split(",",expand = True)
    ```
-3. Extract labels with damage and infrastructure categories
+2. Extract labels with damage and infrastructure categories
 
    ```python
    label_damage_infra = file[file['Answer'].str.contains('damage|infrastructure',na=False,case=False)]
    ```
-4. Filter out infrastructure label with label 'none'
+3. Filter out infrastructure label with label 'none'
    ```python
    label_clean = label_damage_infra[~label_damage_infra['Answer'].str.contains('none',na=False,case=False)]
    ```
-5. Extract data with label does contain 'flood'
+4. Extract data with label does contain 'flood'
    ```python
    label_flood = label_clean[label_clean['Answer'].str.contains('flood',na=False,case=False)]
    ```
-6. Extract url data with the label does contain 'flood'
+5. Extract url data with the label does contain 'flood'
    ```python
    im_flood_lst = label_flood['url'].unique().tolist()
    ```
-7. Extract url data with the label does not contain 'flood'
+6. Extract url data with the label does not contain 'flood'
    ```python
    label_notflood = label_damage_infra[~label_damage_infra['img_url'].isin(im_flood_lst)]
    im_not_flood_lst = label_notflood['url'].unique().tolist()
@@ -137,4 +136,4 @@ label_df.to_csv('/content/drive/My Drive/Colab Notebooks/DS440_data/flood_tiny_l
 
 ## Distribution Statement
 
-[BSD -Clause License](https://github.com/LADI-Dataset/ladi-tutorial/blob/master/LICENSE)
+[BSD 3-Clause License](../LICENSE)

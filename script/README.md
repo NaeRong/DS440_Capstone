@@ -1,10 +1,10 @@
 # Scripts
 
 This is a set of boilerplate scripts describing the [normalized script pattern that GitHub uses in its projects](https://github.blog/2015-06-30-scripts-to-rule-them-all/). The [GitHub Scripts To Rule Them All
-](https://github.com/github/scripts-to-rule-them-all) was used as a template. They were tested using Ubuntu 18.04.3 LTS on Windows 10 and using GridOS 26, a derivative of Red Hat Fedora 26, on the Lincoln Laboratory Supercomputing Cluster.
+](https://github.com/github/scripts-to-rule-them-all) was used as a template. They were tested using Ubuntu 18.04.3 LTS on Windows 10.
 
 - [Scripts](#scripts)
-  - [`FLOOD_ANALYSIS_CORE` and Execution](#flood_analysis_core-and-execution)
+  - [`LADI_DIR_TUTORIAL` and Execution](#ladi_dir_tutorial-and-execution)
   - [Dependencies](#dependencies)
     - [Linux Shell](#linux-shell)
     - [Proxy and Internet Access](#proxy-and-internet-access)
@@ -12,13 +12,12 @@ This is a set of boilerplate scripts describing the [normalized script pattern t
   - [The Scripts](#the-scripts)
     - [script/bootstrap](#scriptbootstrap)
       - [Packages](#packages)
-      - [Git Submodules](#git-submodules)
     - [script/setup](#scriptsetup)
       - [Data](#data)
 
-## `FLOOD_ANALYSIS_CORE` and Execution
+## `LADI_DIR_TUTORIAL` and Execution
 
-These scripts assume that `FLOOD_ANALYSIS_CORE` has been set. Refer to the repository root [README](../README.md) for instructions.
+These scripts assume that `LADI_DIR_TUTORIAL` has been set. Refer to the repository root [README](../README.md) for instructions.
 
 ## Dependencies
 
@@ -26,7 +25,7 @@ These scripts assume that `FLOOD_ANALYSIS_CORE` has been set. Refer to the repos
 
 The scripts need to be run in a Linux shell. For Windows 10 users, you can use [Ubuntu on Windows](https://tutorials.ubuntu.com/tutorial/tutorial-ubuntu-on-windows#0). Specifically for Windows users, system drive and other connected drives are exposed in the `/mnt/` directory. For example, you can access the Windows C: drive via `cd /mnt/c`.
 
-If you modify these scripts, please follow the [convention guide](https://github.com/Airspace-Encounter-Models/em-overview/blob/master/CONTRIBUTING.md#convention-guide) that specifies an end of line character of `LF (\n)`. If the end of line character is changed to `CRLF (\r)`, you will get an error like this:
+If you modify these scripts, please follow the [convention guide](https://github.com/LADI-Dataset/ladi-overview/blob/master/CONTRIBUTING.md#convention-guide) that specifies an end of line character of `LF (\n)`. If the end of line character is changed to `CRLF (\r)`, you will get an error like this:
 
 ### Proxy and Internet Access
 
@@ -50,9 +49,9 @@ You may also need to [configure git to use a proxy](https://stackoverflow.com/q/
 
 ### Superuser Access
 
-Depending on your security policy, you may need to run some scripts as a superuser or another user. These scripts have been tested using [`sudo`](https://manpages.ubuntu.com/manpages/disco/en/man8/sudo.8.html). Depending on how you set up the system variable, `FLOOD_ANALYSIS_CORE` you may need to call [sudo with the `-E` flag](https://stackoverflow.com/a/8633575/363829), preserve env.
+Depending on your security policy, you may need to run some scripts as a superuser or another user. These scripts have been tested using [`sudo`](https://manpages.ubuntu.com/manpages/disco/en/man8/sudo.8.html). Depending on how you set up the system variable, `LADI_DIR_TUTORIAL` you may need to call [sudo with the `-E` flag](https://stackoverflow.com/a/8633575/363829), preserve env.
 
-If running without administrator or sudo access, try running these scripts using `bash`, such as 
+If running without administrator or sudo access, try running these scripts using `bash`, such as
 
 ```bash
 bash ./setup.sh
