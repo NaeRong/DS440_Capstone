@@ -24,4 +24,4 @@ esac
 
 ## Check for $FLOOD_ANALYSIS_CORE
 # https://stackoverflow.com/q/3601515
-if [ -z "${FLOOD_ANALYSIS_CORE:-}" ]; then echo "FLOOD_ANALYSIS_CORE is unset"; else echo "FLOOD_ANALYSIS_CORE is set to '$FLOOD_ANALYSIS_CORE'"; fi
+if [ -z "${LADI_DIR_TUTORIAL:-}" ]; then echo "LADI_DIR_TUTORIAL is unset"; else echo "LADI_DIR_TUTORIAL is set to '$LADI_DIR_TUTORIAL'"; fi
