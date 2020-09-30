@@ -62,6 +62,7 @@ These tutorials focus on how to training and testing a classifier model using Co
 - [PyTorch Data Loading](./tutorials/Pytorch_Data_Load.md)
 - [Train and Test A Classifier](./tutorials/Train_Test_Classifier.md)
 - [Fine Tuning Torchvision Models](./tutorials/Fine_Tune_Torchvision_Models.md)
+
 This documentation is about loading LADI dataset in PyTorch framework including examples of writing custom `Dataset`, `Transforms` and `Dataloader`.
 
 ## Distribution Statement
