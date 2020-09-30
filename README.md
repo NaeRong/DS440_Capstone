@@ -10,7 +10,6 @@ Tutorials for the Low Altitude Disaster Imagery (LADI) dataset. This tutorial wa
   - [Tutorials - Accessing the Dataset](#tutorials---accessing-the-dataset)
   - [Tutorials - Metadata Analysis](#tutorials---metadata-analysis)
     - [Tutorials - Machine Learning](#tutorials---machine-learning)
-    - [PyTorch Data Loading](#pytorch-data-loading)
   - [Distribution Statement](#distribution-statement)
 
 ## Point of Contact
@@ -56,8 +55,6 @@ A set of tutorials are Jupyter Python 3.X notebooks that demonstrate on how to p
 ### Tutorials - Machine Learning
 
 These tutorials focus on how to training and testing a classifier model using Convolutional Neural Network (CNN) from scratch or using pre-trained ResNet and AlexNet.
-
-### PyTorch Data Loading
 
 - [PyTorch Data Loading](./tutorials/Pytorch_Data_Load.md)
 - [Train and Test A Classifier](./tutorials/Train_Test_Classifier.md)
