@@ -262,6 +262,7 @@ Out:
 ```bash
 GroundTruth:  tensor(1) tensor(1) tensor(1) tensor(0) tensor(0) tensor(1) tensor(1) tensor(1) tensor(1) tensor(1) tensor(1) tensor(0) tensor(0) tensor(0) tensor(0) tensor(1)
 ```
+
 Then, we can load the saved model and make some predictions on the images above.
 
 ```python
