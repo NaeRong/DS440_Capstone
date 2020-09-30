@@ -47,7 +47,7 @@ A set of tutorials focused on installing AWS tools and configuring AWS environme
 
 ## Tutorials - Metadata Analysis
 
-A set of tutorials are Jupyter Python 3.X notebooks that demonstrate on how to perform geospatial analysis by enhancing the LADI metadata with third party GIS information. One tutorial identifies the number of images taken within an administrative boundary (e.g. USA states) and assigns each state a color based on the number of images taken. The other tutorial filters images based on an specific annotation and performs various geospatial measurements on this subset.
+A set of tutorials that are Jupyter Python 3.X notebooks that demonstrate on how to perform geospatial analysis by enhancing the LADI metadata with third party GIS information. One tutorial identifies the number of images taken within an administrative boundary (e.g. USA states) and assigns each state a color based on the number of images taken. The other tutorial filters images based on an specific annotation and performs various geospatial measurements on this subset.
 
 - [ISO-3166-2 Administrative Boundaries](./tutorials/Geospatial-Hurricane-Analysis.ipynb)
 - [Geospatial Hurricane Analysis](./tutorials/Geospatial-Hurricane-Analysis.ipynb)
