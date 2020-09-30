@@ -62,6 +62,12 @@ These tutorials focus on how to training and testing a classifier model using Co
 
 This documentation is about loading LADI dataset in PyTorch framework including examples of writing custom `Dataset`, `Transforms` and `Dataloader`.
 
+## Citation
+
+Please use this DOI number reference when citing the software:
+
+[![DOI](https://zenodo.org/badge/263348174.svg)](https://zenodo.org/badge/latestdoi/263348174)
+
 ## Distribution Statement
 
 [BSD 3-Clause License](LICENSE)
