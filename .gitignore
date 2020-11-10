@@ -1,0 +1,26 @@
+# jupyter checkpoint
+*.ipynb_checkpoints
+
+# Shapefiles #
+##############
+*.dbf
+*.fix
+*.prj
+*.qix
+*.shp
+*.shx
+*.cpg
+*.iso.xml
+
+# specific data files
+data/Census-AHS/2017_ahs_national_puf.zip
+data/Census-AHS/ahs2017n.csv
+data/Census-CBSA/tl_2019_us_cbsa.zip
+data/Census-State/tl_2017_us_state.shp.xml
+data/Census-State/tl_2017_us_state.zip
+data/FAA-Airports/Airports.xml
+data/FAA-Airports/faa_airports.zip
+data/Natural-Earth/ne_10m_admin_1_states_provinces.README.html
+data/Natural-Earth/ne_10m_admin_1_states_provinces.VERSION.txt
+data/Natural-Earth/ne_10m_admin_1_states_provinces.zip
+
